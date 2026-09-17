@@ -3,22 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>افزالی‌مَث | دنیای شاد و تعاملی یادگیری ریاضی</title>
-  <!-- فونت زیبا و خوانا -->
+  <title>آموزش نوین ریاضی</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
+      --primary: #4f46e5;
       --secondary: #ec4899;
       --accent: #f59e0b;
-      --success: #10b981;
-      --cyan: #06b6d4;
       --bg-light: #f8fafc;
-      --card-bg: #ffffff;
       --text-main: #1e293b;
       --text-muted: #64748b;
     }
@@ -29,7 +24,6 @@
       box-sizing: border-box;
       user-select: none;
       -webkit-user-select: none;
-      -moz-user-select: none;
     }
 
     body {
@@ -37,34 +31,18 @@
       background: var(--bg-light);
       color: var(--text-main);
       line-height: 1.8;
-      overflow-x: hidden;
     }
 
-    /* نوار بالا */
     header {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(12px);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      background: white;
+      padding: 15px 24px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
       border-bottom: 2px solid #e2e8f0;
-      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08);
-    }
-
-    .nav-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 14px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      text-align: center;
     }
 
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 24px;
+      font-size: 26px;
       font-weight: 900;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
@@ -72,451 +50,323 @@
       text-decoration: none;
     }
 
-    .nav-links {
-      display: flex;
-      gap: 12px;
-      list-style: none;
+    /* بخش قهرمان (Hero Section) شامل تصویر دانش‌آموز */
+    .hero-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
     }
 
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-main);
-      font-weight: 600;
-      font-size: 15px;
-      padding: 8px 18px;
-      border-radius: 12px;
-      transition: all 0.3s ease;
-      background: #f1f5f9;
-    }
-
-    .nav-links a:hover {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-    }
-
-    /* بنر اصلی هدر (Hero Section) */
-    .hero {
-      position: relative;
-      background: radial-gradient(circle at 10% 20%, rgb(240, 243, 255) 0%, rgb(253, 242, 248) 90.1%);
-      padding: 80px 24px 70px;
-      text-align: center;
-      overflow: hidden;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      padding: 6px 18px;
-      background: #e0e7ff;
-      color: var(--primary-dark);
-      font-size: 14px;
-      font-weight: 700;
-      border-radius: 30px;
-      margin-bottom: 20px;
-      border: 1px solid #c7d2fe;
-      animation: bounce 2s infinite;
-    }
-
-    .hero h1 {
-      font-size: 42px;
+    .hero-text h1 {
+      font-size: 44px;
       font-weight: 900;
       color: #0f172a;
-      margin-bottom: 16px;
-      line-height: 1.4;
+      margin-bottom: 15px;
+      line-height: 1.3;
     }
 
-    .hero h1 span {
-      background: linear-gradient(135deg, #4f46e5, #ec4899, #f59e0b);
+    .hero-text h1 span {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .hero p {
+    .hero-text p {
       font-size: 18px;
       color: var(--text-muted);
-      max-width: 650px;
-      margin: 0 auto 32px;
-      font-weight: 400;
+      margin-bottom: 25px;
     }
 
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      padding: 14px 32px;
-      border-radius: 14px;
-      font-size: 16px;
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      color: white;
-      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 12px 28px rgba(99, 102, 241, 0.5);
-    }
-
-    .btn-secondary {
-      background: white;
-      color: var(--text-main);
-      border: 2px solid #e2e8f0;
-    }
-
-    .btn-secondary:hover {
-      background: #f8fafc;
-      border-color: var(--primary);
-      color: var(--primary);
-      transform: translateY(-3px);
-    }
-
-    /* المان‌های معلق شاد و ریاضیاتی */
-    .floating-shape {
-      position: absolute;
-      font-size: 28px;
-      font-weight: 900;
-      opacity: 0.25;
-      animation: float 6s ease-in-out infinite;
-      z-index: 1;
-    }
-    .shape-1 { top: 15%; left: 8%; color: #ec4899; animation-delay: 0s; font-size: 38px; }
-    .shape-2 { top: 25%; right: 10%; color: #6366f1; animation-delay: 1.5s; font-size: 42px; }
-    .shape-3 { bottom: 15%; left: 15%; color: #f59e0b; animation-delay: 3s; font-size: 32px; }
-    .shape-4 { bottom: 20%; right: 12%; color: #10b981; animation-delay: 4.5s; font-size: 36px; }
-
-    /* بدنه اصلی محتوا */
-    main {
-      max-width: 1200px;
-      margin: 50px auto;
-      padding: 0 24px;
+    .hero-image-box {
       position: relative;
-      z-index: 2;
+      border-radius: 30px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(79, 70, 229, 0.15);
+      border: 4px solid white;
+    }
+
+    .hero-image-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .hero-image-box:hover img {
+      transform: scale(1.03);
+    }
+
+    /* بخش پایه‌های تحصیلی */
+    .main-content {
+      max-width: 1200px;
+      margin: 60px auto;
+      padding: 0 24px;
     }
 
     .section-title {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin: 50px 0 24px;
-      font-size: 26px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+      font-size: 30px;
       font-weight: 900;
       color: #0f172a;
     }
 
-    .section-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      color: white;
-    }
-
-    .icon-apps { background: linear-gradient(135deg, #ec4899, #f43f5e); box-shadow: 0 6px 16px rgba(236, 72, 153, 0.35); }
-    .icon-videos { background: linear-gradient(135deg, #6366f1, #3b82f6); box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35); }
-    .icon-pdfs { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35); }
-
-    /* شبکه‌بندی کارت‌ها */
-    .grid {
+    /* گرید ۱۲ پایه */
+    .grades-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 26px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 20px;
     }
 
-    .card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      border: 1px solid #edf2f7;
-      padding: 26px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 35px rgba(99, 102, 241, 0.12);
-      border-color: #c7d2fe;
-    }
-
-    .card-tag {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      font-size: 12px;
-      font-weight: 700;
-      padding: 4px 12px;
-      border-radius: 20px;
-      background: #f1f5f9;
-      color: var(--text-muted);
-    }
-
-    .tag-active { background: #dbeafe; color: #1d4ed8; }
-    .tag-purple { background: #f3e8ff; color: #7e22ce; }
-    .tag-green  { background: #dcfce7; color: #15803d; }
-
-    .card-icon {
-      font-size: 40px;
-      margin-bottom: 18px;
-      display: inline-block;
-    }
-
-    .card h3 {
-      font-size: 20px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      font-size: 14px;
-      color: var(--text-muted);
-      margin-bottom: 22px;
-      line-height: 1.7;
-    }
-
-    .card-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-      padding: 12px 0;
-      border-radius: 12px;
-      font-size: 14px;
-      font-weight: 700;
-      text-decoration: none;
-      background: #f8fafc;
-      color: var(--primary-dark);
+    .grade-card {
+      background: white;
+      border-radius: 18px;
       border: 1px solid #e2e8f0;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+    }
+
+    .grade-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--primary);
+      box-shadow: 0 12px 25px rgba(79, 70, 229, 0.1);
+    }
+
+    .grade-badge {
+      display: inline-block;
+      width: 55px;
+      height: 55px;
+      line-height: 55px;
+      background: #f1f5f9;
+      color: var(--primary);
+      font-size: 20px;
+      font-weight: 900;
+      border-radius: 50%;
+      margin-bottom: 15px;
       transition: 0.3s;
     }
 
-    .card:hover .card-btn {
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    .grade-card:hover .grade-badge {
+      background: var(--primary);
       color: white;
-      border-color: transparent;
     }
 
-    /* نوار ویژگی‌ها / بنر انگیزه */
-    .features-banner {
-      background: linear-gradient(135deg, #4f46e5, #7c3aed);
-      border-radius: 24px;
-      padding: 45px 30px;
-      color: white;
-      margin: 60px 0;
+    .grade-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 8px;
+    }
+
+    .grade-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* استایل کشوهای محتوایی (Accordion) */
+    .grade-content-panel {
+      grid-column: 1 / -1;
+      background: white;
+      border-radius: 20px;
+      border: 2px solid var(--primary);
+      padding: 30px;
+      display: none; /* در ابتدا مخفی است */
+      margin-top: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.08);
+      animation: fadeIn 0.4s ease;
+    }
+
+    .panel-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 25px;
+      border-bottom: 2px dashed #e2e8f0;
+      padding-bottom: 10px;
+    }
+
+    .sub-categories {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 25px;
-      text-align: center;
-      box-shadow: 0 15px 35px rgba(79, 70, 229, 0.25);
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
 
-    .feature-item h4 {
-      font-size: 32px;
-      font-weight: 900;
-      color: #facc15;
-      margin-bottom: 6px;
+    .category-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 20px;
     }
 
-    .feature-item p {
-      font-size: 15px;
-      color: #e0e7ff;
+    .category-box h4 {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    /* فوتر */
+    .box-videos h4 { color: #3b82f6; }
+    .box-apps h4 { color: #ec4899; }
+    .box-docs h4 { color: #10b981; }
+
+    .content-list {
+      list-style: none;
+    }
+
+    .content-list li {
+      margin-bottom: 8px;
+    }
+
+    .content-list a {
+      font-size: 14px;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: 0.2s;
+    }
+
+    .content-list a:hover {
+      color: var(--primary);
+      padding-right: 4px;
+    }
+
     footer {
       background: #0f172a;
       color: #94a3b8;
       text-align: center;
-      padding: 40px 20px;
+      padding: 30px 20px;
       margin-top: 80px;
     }
 
-    footer p {
-      font-size: 15px;
-      margin-bottom: 10px;
-    }
-
-    .footer-highlight {
-      color: #38bdf8;
-      font-weight: 700;
-    }
-
-    /* انیمیشن‌ها */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(8deg); }
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 768px) {
-      .hero h1 { font-size: 28px; }
-      .hero p { font-size: 15px; }
-      .nav-links { display: none; }
+      .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
     }
   </style>
 </head>
-
 <body oncontextmenu="return false">
 
-  <!-- اشیای ریاضی شناور در پس‌زمینه هدر -->
   <header>
-    <div class="nav-container">
-      <a href="#" class="logo">
-        <span>📐</span>
-        <span>افزالی‌مَث</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#apps">📱 اپلیکیشن‌های تعاملی</a></li>
-        <li><a href="#videos">🎬 فیلم‌ها</a></li>
-        <li><a href="#pdfs">📄 جزوه‌ها</a></li>
-      </ul>
-    </div>
+    <a href="#" class="logo">آموزش نوین ریاضی</a>
   </header>
 
-  <!-- هیرو و معرفی پرانرژی -->
-  <section class="hero">
-    <div class="floating-shape shape-1">∑</div>
-    <div class="floating-shape shape-2">π</div>
-    <div class="floating-shape shape-3">∛x</div>
-    <div class="floating-shape shape-4">∞</div>
-
-    <div class="hero-badge">🚀 نسل نوین یادگیری تعاملی ریاضیات</div>
-    <h1>ریاضی رو مثل یک بازی <span>جذاب و هیجان‌انگیز</span> کشف کن!</h1>
-    <p>دیدن، لمس کردن و درک عمیق مفاهیم ریاضی با ابزارهای سه‌بعدی و هوشمند</p>
-
-    <div class="hero-buttons">
-      <a href="#apps" class="btn btn-primary">شروع کار با اپلیکیشن‌ها 🎮</a>
-      <a href="#videos" class="btn btn-secondary">مشاهده آموزش‌ها 💡</a>
+  <!-- هیرو اصلی حاوی تصویر دانش‌آموز شاد -->
+  <section class="hero-container">
+    <div class="hero-text">
+      <h1><span>آموزش نوین ریاضی</span><br>لذت یادگیری از پایه تا کنکور</h1>
+      <p>اینجا مفاهیم سخت ریاضی به بازی‌های ساده، ویدیوهای جذاب و شبیه‌سازهای سه‌بعدی تبدیل می‌شوند تا یادگیری شیرین‌تر از همیشه باشد.</p>
+    </div>
+    <div class="hero-image-box">
+      <!-- اگر عکس را آپلود کردید، نام فایلش را در زیر جایگزین کنید -->
+      <img src="image_gen_79402fd9-3870-4ec0-bd54-579c0218fd67_0.png" alt="یادگیری شاد ریاضی">
     </div>
   </section>
 
-  <main>
-
-    <!-- بخش اول: اپلیکیشن‌های تعاملی ریاضی -->
-    <div class="section-title" id="apps">
-      <div class="section-icon icon-apps">📱</div>
-      <h2>اپلیکیشن‌های تعاملی و سه‌بعدی ریاضی</h2>
+  <main class="main-content">
+    <div class="section-title">
+      <h2>پایه‌ی تحصیلی خود را انتخاب کنید</h2>
     </div>
 
-    <div class="grid">
-      <!-- کارت ۱: مکعب‌ها -->
-      <div class="card">
-        <span class="card-tag tag-purple">هندسه فضایی</span>
-        <div class="card-icon">🧊</div>
-        <h3>دید سه‌بعدی و شمارش مکعب‌ها</h3>
-        <p>شبیه‌ساز چیدمان مکعب‌های فضایی با امکان چرخش ۳۶۰ درجه، مشاهده نماهای بالا، روبرو و راست.</p>
-        <a href="#" class="card-btn">اجرای اپلیکیشن 🚀</a>
-      </div>
+    <div class="grades-grid">
+      <!-- پایه‌های ۱ تا ۱۲ -->
+      <script>
+        const grades = [
+          "اول ابتدایی", "دوم ابتدایی", "سوم ابتدایی", 
+          "چهارم ابتدایی", "پنجم ابتدایی", "ششم ابتدایی", 
+          "هفتم دوره اول", "هشتم دوره اول", "نهم دوره اول", 
+          "دهم متوسطه دوم", "یازدهم متوسطه دوم", "دوازدهم متوسطه دوم"
+        ];
+        
+        grades.forEach((grade, index) => {
+          document.write(`
+            <div class="grade-card" onclick="toggleGradePanel(${index + 1})">
+              <div class="grade-badge">${index + 1}</div>
+              <h3>پایه ${grade}</h3>
+              <p>فیلم، اپلیکیشن، بازی و جزوات تخصصی</p>
+            </div>
+            
+            <div class="grade-content-panel" id="panel-grade-${index + 1}">
+              <div class="panel-title">📚 محتوای اختصاصی پایه ${grade}</div>
+              <div class="sub-categories">
+                
+                <div class="category-box box-videos">
+                  <h4>🎬 فیلم‌های آموزشی</h4>
+                  <ul class="content-list">
+                    <li><a href="#">🎥 فیلم تدریس مفهوم درس اول</a></li>
+                    <li><a href="#">🎥 ویدیو حل تمرین‌های کلیدی</a></li>
+                  </ul>
+                </div>
+                
+                <div class="category-box box-apps">
+                  <h4>🎮 اپلیکیشن و بازی</h4>
+                  <ul class="content-list">
+                    <li><a href="#">📱 شبیه‌ساز ریاضی تعاملی</a></li>
+                    <li><a href="#">🕹️ بازی ریاضی و تمرین مبحث</a></li>
+                  </ul>
+                </div>
+                
+                <div class="category-box box-docs">
+                  <h4>📄 جزوه و نمونه سوال</h4>
+                  <ul class="content-list">
+                    <li><a href="#">📝 خلاصه فرمول‌ها و نکات کلیدی</a></li>
+                    <li><a href="#">📄 نمونه سوالات امتحانی نوبت اول و دوم</a></li>
+                  </ul>
+                </div>
 
-      <!-- کارت ۲: مجموعه‌ها -->
-      <div class="card">
-        <span class="card-tag tag-active">جبر و منطق</span>
-        <div class="card-icon">⭕</div>
-        <h3>آزمایشگاه هوشمند مجموعه‌ها</h3>
-        <p>مفاهیم تعلق، زیرمجموعه، اجتماع، اشتراک و کاردینالیتی به شکل کاملاً بصری و تستی تعاملی.</p>
-        <a href="#" class="card-btn">اجرای اپلیکیشن 🚀</a>
-      </div>
+              </div>
+            </div>
+          `);
+        });
 
-      <!-- کارت ۳: توابع و نمودارها -->
-      <div class="card">
-        <span class="card-tag tag-green">آنالیز ریاضی</span>
-        <div class="card-icon">📈</div>
-        <h3>ردیاب حد و رفتار توابع</h3>
-        <p>مشاهده رفتار توابع در نزدیکی نقاط بحرانی با نمودارهای زنده و متحرک.</p>
-        <a href="#" class="card-btn">اجرای اپلیکیشن 🚀</a>
-      </div>
+        function toggleGradePanel(gradeId) {
+          // بستن بقیه پنل‌ها در صورت تمایل، یا باز ماندن همزمان
+          const allPanels = document.querySelectorAll('.grade-content-panel');
+          allPanels.forEach(panel => {
+            if (panel.id !== 'panel-grade-' + gradeId) {
+              panel.style.display = 'none';
+            }
+          });
+
+          const activePanel = document.getElementById('panel-grade-' + gradeId);
+          if (activePanel.style.display === 'block') {
+            activePanel.style.display = 'none';
+          } else {
+            activePanel.style.display = 'block';
+            activePanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+      </script>
     </div>
-
-    <!-- بنر انگیزشی و آمار -->
-    <div class="features-banner">
-      <div class="feature-item">
-        <h4>۳ بعدی</h4>
-        <p>درک کامل هندسه فضایی</p>
-      </div>
-      <div class="feature-item">
-        <h4>۱۰۰٪ رایگان</h4>
-        <p>همیشه در دسترس دانش‌آموزان</p>
-      </div>
-      <div class="feature-item">
-        <h4>مفهومی و شهودی</h4>
-        <p>یادگیری بدون نیاز به حفظ کردن فرمول</p>
-      </div>
-    </div>
-
-    <!-- بخش دوم: فیلم‌های آموزشی -->
-    <div class="section-title" id="videos">
-      <div class="section-icon icon-videos">🎬</div>
-      <h2>فیلم‌های تدریس مفهومی</h2>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <span class="card-tag">جلسه ۱</span>
-        <div class="card-icon">🎥</div>
-        <h3>رازهای تسلط بر توان و ریشه‌گیری</h3>
-        <p>بررسی تکنیک‌های سریع و مفهومی حل مسائل سخت توان و رادیکال.</p>
-        <a href="#" class="card-btn">مشاهده ویدیو ▶️</a>
-      </div>
-
-      <div class="card">
-        <span class="card-tag">جلسه ۲</span>
-        <div class="card-icon">🎯</div>
-        <h3>دید از بالای مکعب‌ها چطور کار می‌کنه؟</h3>
-        <p>آموزش شیوه تحلیل نماهای دو بعدی از اجسام سه بعدی بدون خطا.</p>
-        <a href="#" class="card-btn">مشاهده ویدیو ▶️</a>
-      </div>
-    </div>
-
-    <!-- بخش سوم: جزوه‌ها و خلاصه‌ها -->
-    <div class="section-title" id="pdfs">
-      <div class="section-icon icon-pdfs">📄</div>
-      <h2>جزوه‌ها و خلاصه فرمول‌های رنگی</h2>
-    </div>
-
-    <div class="grid">
-      <div class="card">
-        <span class="card-tag tag-green">PDF هوشمند</span>
-        <div class="card-icon">📚</div>
-        <h3>دفترچه خلاصه نکات کنکوری هندسه</h3>
-        <p>نمایش اختصاصی جزوه با فونت اختصاصی و تصویرسازی‌های رنگی روی سایت.</p>
-        <a href="#" class="card-btn">مطالعه آنلاین 📖</a>
-      </div>
-    </div>
-
   </main>
 
   <footer>
-    <p>طراحی و توسعه توسط <span class="footer-highlight">استاد افضلی</span> — آکادمی تخصصی ریاضیات</p>
-    <p style="font-size: 13px; opacity: 0.7;">تمامی حقوق برای افزالی‌مَث محفوظ است ©</p>
+    <p>تمامی حقوق برای آکادمی آموزش نوین ریاضی محفوظ است ©</p>
   </footer>
 
-  <!-- اسکریپت امنیتی (غیرفعال کردن کلیدهای میانبر دانلود و کلیک راست) -->
   <script>
     document.addEventListener('keydown', function (e) {
-      // غیرفعال کردن F12, Ctrl+U, Ctrl+S, Ctrl+P
       if (
         e.key === 'F12' ||
         (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'p' || e.key === 'a'))
