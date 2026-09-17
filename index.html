@@ -5,25 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>آموزش نوین ریاضی | پلتفرم تخصصی ریاضیات</title>
 
-  <!-- کتابخانه سوبابیس و استایل‌ها -->
+  <!-- کتابخانه‌ها -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-  <script>
-    // ⚙️ تنظیمات اتصال به دیتابیس Supabase
-    const SUPABASE_URL = "https://msoovfnbkgdqxvftlkl.supabase.co";
-    
-    // ⚠️ فقط کلید API کپی شده را بین این دو گیومه قرار بده:
-    const SUPABASE_KEY = "sb_publishable_ji8Qt0wzbNKwLScCjt4UEw_X2VZSLc1";
-
-    const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  </script>
-
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap');
     body { font-family: 'Vazirmatn', sans-serif; background-color: #f8fafc; }
-    .glass { background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(12px); }
+    .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); }
   </style>
 </head>
 <body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
@@ -37,35 +27,41 @@
         </div>
         <div>
           <h1 class="text-xl font-black text-indigo-950">آموزش نوین ریاضی</h1>
-          <p class="text-xs text-slate-500 font-bold">پلتفرم هوشمند یادگیری ریاضیات</p>
+          <p class="text-xs text-slate-500 font-bold">پلتفرم هوشمند یادگیری ریاضیات (افزالی‌مَث)</p>
         </div>
       </div>
 
-      <!-- وضعیت ورود و ثبت‌نام -->
+      <!-- دکمه‌های ورود و وضعیت کاربر -->
       <div id="auth-guest" class="flex items-center gap-2">
-        <button onclick="openModal('login-modal')" class="px-4 py-2 text-sm font-bold text-indigo-600 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition">ورود</button>
-        <button onclick="openModal('signup-modal')" class="px-4 py-2 text-sm font-bold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 shadow-md transition">ثبت‌نام</button>
+        <button onclick="openModal('login-modal')" class="px-4 py-2 text-sm font-bold text-indigo-600 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition">
+          <i class="fa-solid fa-right-to-bracket ml-1"></i> ورود
+        </button>
+        <button onclick="openModal('signup-modal')" class="px-4 py-2 text-sm font-bold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 shadow-md shadow-indigo-200 transition">
+          <i class="fa-solid fa-user-plus ml-1"></i> ثبت‌نام
+        </button>
       </div>
 
       <div id="auth-user" class="hidden flex items-center gap-3">
         <div class="text-right">
           <span class="text-xs text-slate-400 block">کاربر گرامی</span>
-          <span id="user-display" class="text-sm font-bold text-slate-800"></span>
+          <span id="user-display" class="text-sm font-bold text-indigo-700"></span>
         </div>
-        <button onclick="logout()" class="px-3 py-1.5 text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition">خروج</button>
+        <button onclick="logout()" class="px-3 py-1.5 text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition">
+          <i class="fa-solid fa-arrow-right-from-bracket ml-1"></i> خروج
+        </button>
       </div>
     </div>
   </header>
 
   <!-- بنر اصلی (Hero) -->
-  <section class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+  <section class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
     <div>
-      <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold">آموزش تعاملی و مفهومی</span>
+      <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold">آموزش مفهومی، گام به گام و تعاملی</span>
       <h2 class="text-3xl md:text-5xl font-black text-slate-900 mt-4 leading-tight">
         ریاضیات را با لذت، عمق و انگیزه یاد بگیرید!
       </h2>
       <p class="text-slate-600 mt-4 text-base md:text-lg leading-relaxed">
-        از پایه اول ابتدایی تا دوازدهم و کنکور سراسری، همراه با ویدیوهای آموزشی، جزوات استاندارد و اپلیکیشن‌های بازی‌محور ریاضی.
+        پوشش جامع از پایه اول ابتدایی تا دوازدهم کنکور، همراه با اپلیکیشن‌های تعاملی، جزوات اختصاصی و آموزش ویدیویی اساتید برتر.
       </p>
     </div>
     <div class="flex justify-center">
@@ -73,14 +69,123 @@
     </div>
   </section>
 
-  <!-- بخش پایه‌های تحصیلی -->
+  <!-- بخش دسته‌بندی دوره‌های تحصیلی (۴ دوره آموزشی) -->
   <section class="max-w-7xl mx-auto px-4 py-10 w-full">
-    <div class="text-center mb-8">
-      <h3 class="text-2xl font-black text-slate-900">پایه‌های تحصیلی</h3>
-      <p class="text-slate-500 text-sm mt-1">پایه مورد نظر خود را انتخاب کنید</p>
+    <div class="text-center mb-10">
+      <h3 class="text-2xl md:text-3xl font-black text-slate-900">پایه‌ها و دوره‌های تحصیلی</h3>
+      <p class="text-slate-500 text-sm mt-2">دوره و پایه تحصیلی خود را انتخاب کنید</p>
     </div>
-    <div id="grades-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-      <!-- پایه‌ها توسط جاوااسکریپت ساخته می‌شوند -->
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- دوره ۱: ابتدایی دوره اول -->
+      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition">
+        <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+          <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">
+            🌱
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-base">ابتدایی (دوره اول)</h4>
+            <p class="text-[11px] text-slate-400">مفاهیم پایه، شمارش و درک ریاضی</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="selectGrade('اول ابتدایی')" class="p-3 bg-emerald-50 hover:bg-emerald-600 hover:text-white rounded-xl text-center font-bold text-emerald-700 transition">
+            <span class="block text-xl">۱</span>
+            <span class="text-xs">پایه اول</span>
+          </button>
+          <button onclick="selectGrade('دوم ابتدایی')" class="p-3 bg-emerald-50 hover:bg-emerald-600 hover:text-white rounded-xl text-center font-bold text-emerald-700 transition">
+            <span class="block text-xl">۲</span>
+            <span class="text-xs">پایه دوم</span>
+          </button>
+          <button onclick="selectGrade('سوم ابتدایی')" class="p-3 bg-emerald-50 hover:bg-emerald-600 hover:text-white rounded-xl text-center font-bold text-emerald-700 transition">
+            <span class="block text-xl">۳</span>
+            <span class="text-xs">پایه سوم</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- دوره ۲: ابتدایی دوره دوم -->
+      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition">
+        <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+          <div class="w-10 h-10 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center font-bold text-lg">
+            📘
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-base">ابتدایی (دوره دوم)</h4>
+            <p class="text-[11px] text-slate-400">محاسبات، کسرها، اعشار و تناسب</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="selectGrade('چهارم ابتدایی')" class="p-3 bg-sky-50 hover:bg-sky-600 hover:text-white rounded-xl text-center font-bold text-sky-700 transition">
+            <span class="block text-xl">۴</span>
+            <span class="text-xs">پایه چهارم</span>
+          </button>
+          <button onclick="selectGrade('پنجم ابتدایی')" class="p-3 bg-sky-50 hover:bg-sky-600 hover:text-white rounded-xl text-center font-bold text-sky-700 transition">
+            <span class="block text-xl">۵</span>
+            <span class="text-xs">پایه پنجم</span>
+          </button>
+          <button onclick="selectGrade('ششم ابتدایی')" class="p-3 bg-sky-50 hover:bg-sky-600 hover:text-white rounded-xl text-center font-bold text-sky-700 transition">
+            <span class="block text-xl">۶</span>
+            <span class="text-xs">پایه ششم</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- دوره ۳: متوسطه اول -->
+      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition">
+        <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+          <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg">
+            📐
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-base">متوسطه دوره اول</h4>
+            <p class="text-[11px] text-slate-400">جبر، هندسه مقدماتی و مجموعه‌ها</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="selectGrade('هفتم')" class="p-3 bg-indigo-50 hover:bg-indigo-600 hover:text-white rounded-xl text-center font-bold text-indigo-700 transition">
+            <span class="block text-xl">۷</span>
+            <span class="text-xs">پایه هفتم</span>
+          </button>
+          <button onclick="selectGrade('هشتم')" class="p-3 bg-indigo-50 hover:bg-indigo-600 hover:text-white rounded-xl text-center font-bold text-indigo-700 transition">
+            <span class="block text-xl">۸</span>
+            <span class="text-xs">پایه هشتم</span>
+          </button>
+          <button onclick="selectGrade('نهم')" class="p-3 bg-indigo-50 hover:bg-indigo-600 hover:text-white rounded-xl text-center font-bold text-indigo-700 transition">
+            <span class="block text-xl">۹</span>
+            <span class="text-xs">پایه نهم</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- دوره ۴: متوسطه دوم و کنکور -->
+      <div class="bg-white rounded-3xl p-5 border border-slate-200 shadow-sm hover:shadow-lg transition">
+        <div class="flex items-center gap-3 mb-4 pb-3 border-b border-slate-100">
+          <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg">
+            🎓
+          </div>
+          <div>
+            <h4 class="font-bold text-slate-800 text-base">متوسطه دوره دوم</h4>
+            <p class="text-[11px] text-slate-400">حسابان، هندسه، گسسته و کنکور</p>
+          </div>
+        </div>
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="selectGrade('دهم')" class="p-3 bg-purple-50 hover:bg-purple-600 hover:text-white rounded-xl text-center font-bold text-purple-700 transition">
+            <span class="block text-xl">۱۰</span>
+            <span class="text-xs">پایه دهم</span>
+          </button>
+          <button onclick="selectGrade('یازدهم')" class="p-3 bg-purple-50 hover:bg-purple-600 hover:text-white rounded-xl text-center font-bold text-purple-700 transition">
+            <span class="block text-xl">۱۱</span>
+            <span class="text-xs">پایه یازدهم</span>
+          </button>
+          <button onclick="selectGrade('دوازدهم')" class="p-3 bg-purple-600 text-white hover:bg-purple-700 rounded-xl text-center font-bold transition shadow-md">
+            <span class="block text-xl">۱۲</span>
+            <span class="text-xs">دوازدهم/کنکور</span>
+          </button>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -89,98 +194,98 @@
     <div class="flex justify-between items-center mb-6">
       <div>
         <h3 class="text-2xl font-black text-slate-900">اساتید و همکاران آموزشی</h3>
-        <p class="text-slate-500 text-xs mt-1">تدریس توسط نخبگان و دبیران برتر ریاضی</p>
+        <p class="text-slate-500 text-xs mt-1">تدریس توسط نخبگان و دبیران برتر ریاضی کشور</p>
       </div>
-      <button onclick="alert('برای ثبت‌نام به عنوان مدرس، لطفا ابتدا وارد حساب خود شوید.')" class="text-xs sm:text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-2 rounded-xl hover:bg-indigo-100 transition">
+      <button onclick="alert('برای ارسال درخواست تدریس، لطفاً ابتدا وارد حساب کاربری خود شوید.')" class="text-xs sm:text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-2 rounded-xl hover:bg-indigo-100 transition">
         + همکاری به عنوان مدرس
       </button>
     </div>
     
     <div id="teachers-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-      <!-- کارت پیش‌فرض استاد افزالی -->
       <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm">
-        <div class="w-16 h-16 bg-indigo-600 text-white rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-3 shadow-md">
+        <div class="w-16 h-16 bg-indigo-600 text-white rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-3 shadow-md shadow-indigo-100">
           استاد
         </div>
         <h4 class="font-bold text-slate-800 text-base">استاد افزالی</h4>
         <p class="text-xs text-indigo-600 font-semibold mt-1">مدرس ریاضیات و هندسه تحلیلی</p>
-        <p class="text-xs text-slate-400 mt-2">طراح سوال و مؤلف محتوای تعاملی</p>
+        <p class="text-xs text-slate-400 mt-2">مؤلف محتوای تعاملی و اپلیکیشن‌های ریاضی</p>
       </div>
     </div>
   </section>
 
   <!-- فوتر -->
   <footer class="bg-slate-900 text-white py-8 text-center text-xs text-slate-400 mt-12">
-    <p>© ۱۴۰۳ - تمامی حقوق متعلق به سامانه آموزش نوین ریاضی (افزالی‌مَث) است.</p>
+    <p>© ۱۴۰۳ - تمامی حقوق محفوظ و متعلق به سامانه آموزش نوین ریاضی (افزالی‌مَث) است.</p>
   </footer>
 
   <!-- پنجره مودال ورود -->
   <div id="login-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl relative">
-      <button onclick="closeModal('login-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-slate-700">✕</button>
-      <h3 class="text-xl font-bold text-slate-900 mb-4 text-center">ورود به حساب</h3>
+      <button onclick="closeModal('login-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-slate-700 text-lg font-bold">✕</button>
+      <h3 class="text-xl font-bold text-slate-900 mb-4 text-center">ورود به حساب کاربری</h3>
       <input type="email" id="login-email" placeholder="آدرس ایمیل" class="w-full p-3 border rounded-xl mb-3 text-sm focus:outline-indigo-600">
       <input type="password" id="login-pass" placeholder="رمز عبور" class="w-full p-3 border rounded-xl mb-4 text-sm focus:outline-indigo-600">
-      <button onclick="loginUser()" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">ورود</button>
+      <button onclick="loginUser()" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">ورود به سیستم</button>
     </div>
   </div>
 
   <!-- پنجره مودال ثبت نام -->
   <div id="signup-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl relative">
-      <button onclick="closeModal('signup-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-slate-700">✕</button>
+      <button onclick="closeModal('signup-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-slate-700 text-lg font-bold">✕</button>
       <h3 class="text-xl font-bold text-slate-900 mb-4 text-center">ایجاد حساب جدید</h3>
       <input type="email" id="signup-email" placeholder="آدرس ایمیل" class="w-full p-3 border rounded-xl mb-3 text-sm focus:outline-indigo-600">
-      <input type="password" id="signup-pass" placeholder="رمز عبور (حداقل ۶ نویسه)" class="w-full p-3 border rounded-xl mb-4 text-sm focus:outline-indigo-600">
-      <button onclick="registerUser()" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">ثبت‌نام</button>
+      <input type="password" id="signup-pass" placeholder="رمز عبور (حداقل ۶ کاراکتر)" class="w-full p-3 border rounded-xl mb-4 text-sm focus:outline-indigo-600">
+      <button onclick="registerUser()" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">ثبت‌نام کاربر</button>
     </div>
   </div>
 
-  <!-- منطق و کدهای عملکردی -->
+  <!-- کدهای جاوااسکریپت و تعامل با Supabase -->
   <script>
-    // ساخت خودکار دکمه‌های پایه‌های اول تا دوازدهم
-    const grades = ['اول', 'دوم', 'سوم', 'چهارم', 'پنجم', 'ششم', 'هفتم', 'هشتم', 'نهم', 'دهم', 'یازدهم', 'دوازدهم'];
-    const grid = GAPGPTMASKTOKENulw2tt8pyl8X0X'grades-grid');
+    const SUPABASE_URL = "https://msoovfnbkgdqxvftlkl.supabase.co";
+    const SUPABASE_KEY = "GAPGPTMASKTOKENuath0y05ysgX0X";
 
-    grades.forEach((grade, idx) => {
-      const card = document.createElement('div');
-      card.className = "bg-white p-5 rounded-2xl border border-slate-200 text-center shadow-sm hover:shadow-md hover:border-indigo-400 cursor-pointer transition";
-      card.innerHTML = `
-        <div class="text-indigo-600 font-black text-2xl mb-1">${idx + 1}</div>
-        <div class="text-xs font-bold text-slate-700">پایه ${grade}</div>
-      `;
-      card.onclick = () => alert(`محتوای ریاضی پایه ${grade} به زودی قرار می‌گیرد!`);
-      grid.appendChild(card);
-    });
+    // ساخت ارتباط دیتابیس بدون هیچ کاراکتر اضافه
+    const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    function openModal(id) { secret-db4d36b8id).classList.remove('hidden'); }
-    function closeModal(id) { secret-db4d36b8id).classList.add('hidden'); }
+    // مدیریت باز و بسته کردن پنجره‌ها
+    function openModal(id) { 
+      document.getElementById(id).classList.remove('hidden'); 
+    }
+    function closeModal(id) { 
+      document.getElementById(id).classList.add('hidden'); 
+    }
 
-    // ثبت‌نام با ایمیل و پسورد
+    // پیام کلیک روی پایه‌ها
+    function selectGrade(gradeName) {
+      alert(`محتوای آموزشی "${gradeName}" به زودی فعال خواهد شد!`);
+    }
+
+    // ثبت نام کاربر جدید
     async function registerUser() {
-      const email = GAPGPTMASKTOKENulw2tt8pyl8X1X'signup-email').value;
-      const password = GAPGPTMASKTOKENulw2tt8pyl8X2X'signup-pass').value;
-      if(!email || !password) return alert('لطفاً تمام فیلدها را پر کنید.');
+      const email = document.getElementById('signup-email').value.trim();
+      const password = document.getElementById('signup-pass').value;
+      if(!email || !password) return alert('لطفاً ایمیل و رمز عبور را وارد کنید.');
 
       const { data, error } = await db.auth.signUp({ email, password });
       if (error) {
-        alert('خطا: ' + error.message);
+        alert('خطا در ثبت‌نام: ' + error.message);
       } else {
-        alert('ثبت‌نام شما انجام شد!');
+        alert('ثبت‌نام با موفقیت انجام شد!');
         closeModal('signup-modal');
         checkUserSession();
       }
     }
 
-    // ورود به سیستم
+    // ورود کاربر
     async function loginUser() {
-      const email = GAPGPTMASKTOKENulw2tt8pyl8X3X'login-email').value;
-      const password = GAPGPTMASKTOKENulw2tt8pyl8X4X'login-pass').value;
-      if(!email || !password) return alert('لطفاً ایمیل و رمز را وارد کنید.');
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-pass').value;
+      if(!email || !password) return alert('لطفاً ایمیل و رمز عبور را وارد کنید.');
 
       const { data, error } = await db.auth.signInWithPassword({ email, password });
       if (error) {
-        alert('خطا در ورود: ' + error.message);
+        alert('ورود ناموفق: ' + error.message);
       } else {
         alert('خوش آمدید!');
         closeModal('login-modal');
@@ -194,12 +299,12 @@
       checkUserSession();
     }
 
-    // بررسی وضعیت کاربر وارد شده
+    // وضعیت لاگین
     async function checkUserSession() {
       const { data: { user } } = await db.auth.getUser();
-      const guestDiv = GAPGPTMASKTOKENulw2tt8pyl8X5X'auth-guest');
-      const userDiv = GAPGPTMASKTOKENulw2tt8pyl8X6X'auth-user');
-      const userDisplay = GAPGPTMASKTOKENulw2tt8pyl8X7X'user-display');
+      const guestDiv = document.getElementById('auth-guest');
+      const userDiv = document.getElementById('auth-user');
+      const userDisplay = document.getElementById('user-display');
 
       if (user) {
         guestDiv.classList.add('hidden');
@@ -211,7 +316,7 @@
       }
     }
 
-    // اجرای خودکار در بدو ورود به صفحه
+    // اجرا در بدو ورود به سایت
     checkUserSession();
   </script>
 </body>
