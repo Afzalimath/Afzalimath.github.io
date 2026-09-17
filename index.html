@@ -75,27 +75,40 @@
         </div>
     </div>
 
-    <script>
-        const URL = "https://msoovfnbkgdqxvftlkl.supabase.co";
-        const KEY = "sb_publishable_ji8Qt0wzbNKwLScCjt4UEw_X2VZSLc1";
-        const db = supabase.createClient(URL, KEY);
+   <script>
+  // اول متغیرهای سراسری را تعریف می‌کنیم
+  const SUPABASE_URL = "https://msoovfnbkgdqxvftlkl.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_ji8Qt0wzbNKwLScCjt4UEw_X2VZSLc1"; 
+  let db; // تعریف متغیر به صورت سراسری
 
-        async function loginAdmin() {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const { error } = await db.auth.signInWithPassword({ email, password });
-            if (error) alert("خطا: " + error.message);
-            else { alert("خوش آمدید مدیر!"); location.reload(); }
-        }
+  document.addEventListener('DOMContentLoaded', () => {
+    // مقداردهی بعد از لود کامل صفحه
+    db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    
+    // حالا که db آماده شد، چک کن
+    checkSession();
+  });
 
-        async function checkSession() {
-            const { data: { user } } = await db.auth.getUser();
-            if (user) {
-                document.getElementById('auth-zone').classList.add('hidden');
-                document.getElementById('admin-zone').classList.remove('hidden');
-            }
-        }
-        checkSession();
-    </script>
+  async function loginAdmin() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    // چک کن که db حتما مقداردهی شده باشد
+    if (!db) return alert("خطا: اتصال دیتابیس برقرار نشده است.");
+
+    const { error } = await db.auth.signInWithPassword({ email, password });
+    if (error) alert("خطا: " + error.message);
+    else { alert("خوش آمدید مدیر!"); location.reload(); }
+  }
+
+  async function checkSession() {
+    if (!db) return; // محافظت از اجرا قبل از آماده‌سازی
+    const { data: { user } } = await db.auth.getUser();
+    if (user) {
+      document.getElementById('auth-zone').classList.add('hidden');
+      document.getElementById('admin-zone').classList.remove('hidden');
+    }
+  }
+</script>
 </body>
 </html>
