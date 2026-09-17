@@ -1,73 +1,530 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>افزالی‌مَث | آموزش ریاضی به سبک جدید</title>
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; user-select:none; }
-  body { font-family:Tahoma, sans-serif; background:#0f172a; color:#e2e8f0; line-height:1.9; }
-  header { background:#1e293b; padding:25px; text-align:center; border-bottom:3px solid #38bdf8; }
-  header h1 { color:#38bdf8; font-size:28px; }
-  header p { color:#94a3b8; margin-top:6px; }
-  nav { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; padding:15px; background:#1e293b; }
-  nav a { color:#e2e8f0; text-decoration:none; padding:8px 20px; border-radius:8px; background:#334155; transition:.3s; }
-  nav a:hover { background:#38bdf8; color:#0f172a; }
-  main { max-width:1000px; margin:30px auto; padding:0 15px; }
-  h2 { color:#38bdf8; margin:35px 0 15px; border-right:5px solid #38bdf8; padding-right:12px; }
-  .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
-  .card { background:#1e293b; border-radius:14px; padding:22px; border:1px solid #334155; transition:.3s; }
-  .card:hover { transform:translateY(-5px); border-color:#38bdf8; }
-  .card h3 { color:#facc15; margin-bottom:10px; }
-  .card p { color:#94a3b8; font-size:14px; }
-  footer { text-align:center; padding:25px; color:#64748b; border-top:1px solid #334155; margin-top:40px; }
-  body { -webkit-touch-callout:none; -webkit-user-select:none; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>افزالی‌مَث | دنیای شاد و تعاملی یادگیری ریاضی</title>
+  <!-- فونت زیبا و خوانا -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #ec4899;
+      --accent: #f59e0b;
+      --success: #10b981;
+      --cyan: #06b6d4;
+      --bg-light: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+    }
+
+    body {
+      font-family: 'Vazirmatn', Tahoma, sans-serif;
+      background: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.8;
+      overflow-x: hidden;
+    }
+
+    /* نوار بالا */
+    header {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid #e2e8f0;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 8px 18px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      background: #f1f5f9;
+    }
+
+    .nav-links a:hover {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    /* بنر اصلی هدر (Hero Section) */
+    .hero {
+      position: relative;
+      background: radial-gradient(circle at 10% 20%, rgb(240, 243, 255) 0%, rgb(253, 242, 248) 90.1%);
+      padding: 80px 24px 70px;
+      text-align: center;
+      overflow: hidden;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 18px;
+      background: #e0e7ff;
+      color: var(--primary-dark);
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 30px;
+      margin-bottom: 20px;
+      border: 1px solid #c7d2fe;
+      animation: bounce 2s infinite;
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      font-weight: 900;
+      color: #0f172a;
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, #4f46e5, #ec4899, #f59e0b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text-muted);
+      max-width: 650px;
+      margin: 0 auto 32px;
+      font-weight: 400;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 28px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--text-main);
+      border: 2px solid #e2e8f0;
+    }
+
+    .btn-secondary:hover {
+      background: #f8fafc;
+      border-color: var(--primary);
+      color: var(--primary);
+      transform: translateY(-3px);
+    }
+
+    /* المان‌های معلق شاد و ریاضیاتی */
+    .floating-shape {
+      position: absolute;
+      font-size: 28px;
+      font-weight: 900;
+      opacity: 0.25;
+      animation: float 6s ease-in-out infinite;
+      z-index: 1;
+    }
+    .shape-1 { top: 15%; left: 8%; color: #ec4899; animation-delay: 0s; font-size: 38px; }
+    .shape-2 { top: 25%; right: 10%; color: #6366f1; animation-delay: 1.5s; font-size: 42px; }
+    .shape-3 { bottom: 15%; left: 15%; color: #f59e0b; animation-delay: 3s; font-size: 32px; }
+    .shape-4 { bottom: 20%; right: 12%; color: #10b981; animation-delay: 4.5s; font-size: 36px; }
+
+    /* بدنه اصلی محتوا */
+    main {
+      max-width: 1200px;
+      margin: 50px auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 50px 0 24px;
+      font-size: 26px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .section-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: white;
+    }
+
+    .icon-apps { background: linear-gradient(135deg, #ec4899, #f43f5e); box-shadow: 0 6px 16px rgba(236, 72, 153, 0.35); }
+    .icon-videos { background: linear-gradient(135deg, #6366f1, #3b82f6); box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35); }
+    .icon-pdfs { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35); }
+
+    /* شبکه‌بندی کارت‌ها */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 26px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      border: 1px solid #edf2f7;
+      padding: 26px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 35px rgba(99, 102, 241, 0.12);
+      border-color: #c7d2fe;
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: #f1f5f9;
+      color: var(--text-muted);
+    }
+
+    .tag-active { background: #dbeafe; color: #1d4ed8; }
+    .tag-purple { background: #f3e8ff; color: #7e22ce; }
+    .tag-green  { background: #dcfce7; color: #15803d; }
+
+    .card-icon {
+      font-size: 40px;
+      margin-bottom: 18px;
+      display: inline-block;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      line-height: 1.7;
+    }
+
+    .card-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 12px 0;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      background: #f8fafc;
+      color: var(--primary-dark);
+      border: 1px solid #e2e8f0;
+      transition: 0.3s;
+    }
+
+    .card:hover .card-btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border-color: transparent;
+    }
+
+    /* نوار ویژگی‌ها / بنر انگیزه */
+    .features-banner {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      border-radius: 24px;
+      padding: 45px 30px;
+      color: white;
+      margin: 60px 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(79, 70, 229, 0.25);
+    }
+
+    .feature-item h4 {
+      font-size: 32px;
+      font-weight: 900;
+      color: #facc15;
+      margin-bottom: 6px;
+    }
+
+    .feature-item p {
+      font-size: 15px;
+      color: #e0e7ff;
+    }
+
+    /* فوتر */
+    footer {
+      background: #0f172a;
+      color: #94a3b8;
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 80px;
+    }
+
+    footer p {
+      font-size: 15px;
+      margin-bottom: 10px;
+    }
+
+    .footer-highlight {
+      color: #38bdf8;
+      font-weight: 700;
+    }
+
+    /* انیمیشن‌ها */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(8deg); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 15px; }
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
+
 <body oncontextmenu="return false">
 
-<header>
-  <h1>🧮 افزالی‌مَث</h1>
-  <p>آموزش ریاضی به سبک جدید — فیلم، اپلیکیشن تعاملی و جزوه</p>
-</header>
-
-<nav>
-  <a href="#videos">🎬 فیلم‌های آموزشی</a>
-  <a href="#apps">📱 اپلیکیشن‌های تعاملی</a>
-  <a href="#pdfs">📄 جزوه‌ها</a>
-</nav>
-
-<main>
-
-  <h2 id="videos">🎬 فیلم‌های آموزشی</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>به‌زودی...</h3>
-      <p>اولین ویدیوی آموزشی اینجا قرار می‌گیرد.</p>
+  <!-- اشیای ریاضی شناور در پس‌زمینه هدر -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <span>📐</span>
+        <span>افزالی‌مَث</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#apps">📱 اپلیکیشن‌های تعاملی</a></li>
+        <li><a href="#videos">🎬 فیلم‌ها</a></li>
+        <li><a href="#pdfs">📄 جزوه‌ها</a></li>
+      </ul>
     </div>
-  </div>
+  </header>
 
-  <h2 id="apps">📱 اپلیکیشن‌های تعاملی</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>به‌زودی...</h3>
-      <p>اپلیکیشن‌های HTML تعاملی ریاضی اینجا اجرا می‌شوند.</p>
+  <!-- هیرو و معرفی پرانرژی -->
+  <section class="hero">
+    <div class="floating-shape shape-1">∑</div>
+    <div class="floating-shape shape-2">π</div>
+    <div class="floating-shape shape-3">∛x</div>
+    <div class="floating-shape shape-4">∞</div>
+
+    <div class="hero-badge">🚀 نسل نوین یادگیری تعاملی ریاضیات</div>
+    <h1>ریاضی رو مثل یک بازی <span>جذاب و هیجان‌انگیز</span> کشف کن!</h1>
+    <p>دیدن، لمس کردن و درک عمیق مفاهیم ریاضی با ابزارهای سه‌بعدی و هوشمند</p>
+
+    <div class="hero-buttons">
+      <a href="#apps" class="btn btn-primary">شروع کار با اپلیکیشن‌ها 🎮</a>
+      <a href="#videos" class="btn btn-secondary">مشاهده آموزش‌ها 💡</a>
     </div>
-  </div>
+  </section>
 
-  <h2 id="pdfs">📄 جزوه‌ها</h2>
-  <div class="grid">
-    <div class="card">
-      <h3>به‌زودی...</h3>
-      <p>جزوه‌های ریاضی بدون امکان دانلود اینجا نمایش داده می‌شوند.</p>
+  <main>
+
+    <!-- بخش اول: اپلیکیشن‌های تعاملی ریاضی -->
+    <div class="section-title" id="apps">
+      <div class="section-icon icon-apps">📱</div>
+      <h2>اپلیکیشن‌های تعاملی و سه‌بعدی ریاضی</h2>
     </div>
-  </div>
 
-</main>
+    <div class="grid">
+      <!-- کارت ۱: مکعب‌ها -->
+      <div class="card">
+        <span class="card-tag tag-purple">هندسه فضایی</span>
+        <div class="card-icon">🧊</div>
+        <h3>دید سه‌بعدی و شمارش مکعب‌ها</h3>
+        <p>شبیه‌ساز چیدمان مکعب‌های فضایی با امکان چرخش ۳۶۰ درجه، مشاهده نماهای بالا، روبرو و راست.</p>
+        <a href="#" class="card-btn">اجرای اپلیکیشن 🚀</a>
+      </div>
 
-<footer>
-  © افزالی‌مَث — همه‌ی حقوق محفوظ است.
-</footer>
+      <!-- کارت ۲: مجموعه‌ها -->
+      <div class="card">
+        <span class="card-tag tag-active">جبر و منطق</span>
+        <div class="card-icon">⭕</div>
+        <h3>آزمایشگاه هوشمند مجموعه‌ها</h3>
+        <p>مفاهیم تعلق، زیرمجموعه، اجتماع، اشتراک و کاردینالیتی به شکل کاملاً بصری و تستی تعاملی.</p>
+        <a href="#" class="card-btn">اجرای اپلیکیشن 🚀</a>
+      </div>
 
+      <!-- کارت ۳: توابع و نمودارها -->
+      <div class="card">
+        <span class="card-tag tag-green">آنالیز ریاضی</span>
+        <div class="card-icon">📈</div>
+        <h3>ردیاب حد و رفتار توابع</h3>
+        <p>مشاهده رفتار توابع در نزدیکی نقاط بحرانی با نمودارهای زنده و متحرک.</p>
+        <a href="#" class="card-btn">اجرای اپلیکیشن 🚀</a>
+      </div>
+    </div>
+
+    <!-- بنر انگیزشی و آمار -->
+    <div class="features-banner">
+      <div class="feature-item">
+        <h4>۳ بعدی</h4>
+        <p>درک کامل هندسه فضایی</p>
+      </div>
+      <div class="feature-item">
+        <h4>۱۰۰٪ رایگان</h4>
+        <p>همیشه در دسترس دانش‌آموزان</p>
+      </div>
+      <div class="feature-item">
+        <h4>مفهومی و شهودی</h4>
+        <p>یادگیری بدون نیاز به حفظ کردن فرمول</p>
+      </div>
+    </div>
+
+    <!-- بخش دوم: فیلم‌های آموزشی -->
+    <div class="section-title" id="videos">
+      <div class="section-icon icon-videos">🎬</div>
+      <h2>فیلم‌های تدریس مفهومی</h2>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <span class="card-tag">جلسه ۱</span>
+        <div class="card-icon">🎥</div>
+        <h3>رازهای تسلط بر توان و ریشه‌گیری</h3>
+        <p>بررسی تکنیک‌های سریع و مفهومی حل مسائل سخت توان و رادیکال.</p>
+        <a href="#" class="card-btn">مشاهده ویدیو ▶️</a>
+      </div>
+
+      <div class="card">
+        <span class="card-tag">جلسه ۲</span>
+        <div class="card-icon">🎯</div>
+        <h3>دید از بالای مکعب‌ها چطور کار می‌کنه؟</h3>
+        <p>آموزش شیوه تحلیل نماهای دو بعدی از اجسام سه بعدی بدون خطا.</p>
+        <a href="#" class="card-btn">مشاهده ویدیو ▶️</a>
+      </div>
+    </div>
+
+    <!-- بخش سوم: جزوه‌ها و خلاصه‌ها -->
+    <div class="section-title" id="pdfs">
+      <div class="section-icon icon-pdfs">📄</div>
+      <h2>جزوه‌ها و خلاصه فرمول‌های رنگی</h2>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <span class="card-tag tag-green">PDF هوشمند</span>
+        <div class="card-icon">📚</div>
+        <h3>دفترچه خلاصه نکات کنکوری هندسه</h3>
+        <p>نمایش اختصاصی جزوه با فونت اختصاصی و تصویرسازی‌های رنگی روی سایت.</p>
+        <a href="#" class="card-btn">مطالعه آنلاین 📖</a>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>طراحی و توسعه توسط <span class="footer-highlight">استاد افضلی</span> — آکادمی تخصصی ریاضیات</p>
+    <p style="font-size: 13px; opacity: 0.7;">تمامی حقوق برای افزالی‌مَث محفوظ است ©</p>
+  </footer>
+
+  <!-- اسکریپت امنیتی (غیرفعال کردن کلیدهای میانبر دانلود و کلیک راست) -->
+  <script>
+    document.addEventListener('keydown', function (e) {
+      // غیرفعال کردن F12, Ctrl+U, Ctrl+S, Ctrl+P
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'p' || e.key === 'a'))
+      ) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  </script>
 </body>
 </html>
