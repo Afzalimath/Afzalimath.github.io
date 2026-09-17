@@ -1,390 +1,218 @@
-<script>
-  // ===== تنظیمات Supabase =====
-  const SUPABASE_URL = "https://msoovfnbkgdqxvfxtlkl.supabase.co"; // ← آدرس پروژه‌ات
-  const SUPABASE_KEY = "sb_publishable_XXXXXXXXXXXXXXXXXXXXXX";    // ← کلید کامل کپی‌شده اینجا
-</script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-</script>
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>آموزش نوین ریاضی</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <title>آموزش نوین ریاضی | پلتفرم تخصصی ریاضیات</title>
+
+  <!-- کتابخانه سوبابیس و استایل‌ها -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    // ⚙️ تنظیمات اتصال به دیتابیس Supabase
+    const SUPABASE_URL = "https://msoovfnbkgdqxvftlkl.supabase.co";
+    
+    // ⚠️ فقط کلید API کپی شده را بین این دو گیومه قرار بده:
+    const SUPABASE_KEY = "sb_publishable_ji8Qt0wzbNKwLScCjt4UEw_X2VZSLc1";
+
+    const db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  </script>
 
   <style>
-    :root {
-      --primary: #4f46e5;
-      --secondary: #ec4899;
-      --accent: #f59e0b;
-      --bg-light: #f8fafc;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    body {
-      font-family: 'Vazirmatn', Tahoma, sans-serif;
-      background: var(--bg-light);
-      color: var(--text-main);
-      line-height: 1.8;
-    }
-
-    header {
-      background: white;
-      padding: 15px 24px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-      border-bottom: 2px solid #e2e8f0;
-      text-align: center;
-    }
-
-    .logo {
-      font-size: 26px;
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-decoration: none;
-    }
-
-    /* بخش قهرمان (Hero Section) شامل تصویر دانش‌آموز */
-    .hero-container {
-      max-width: 1200px;
-      margin: 40px auto;
-      padding: 0 24px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-
-    .hero-text h1 {
-      font-size: 44px;
-      font-weight: 900;
-      color: #0f172a;
-      margin-bottom: 15px;
-      line-height: 1.3;
-    }
-
-    .hero-text h1 span {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-text p {
-      font-size: 18px;
-      color: var(--text-muted);
-      margin-bottom: 25px;
-    }
-
-    .hero-image-box {
-      position: relative;
-      border-radius: 30px;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(79, 70, 229, 0.15);
-      border: 4px solid white;
-    }
-
-    .hero-image-box img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: transform 0.5s ease;
-    }
-
-    .hero-image-box:hover img {
-      transform: scale(1.03);
-    }
-
-    /* بخش پایه‌های تحصیلی */
-    .main-content {
-      max-width: 1200px;
-      margin: 60px auto;
-      padding: 0 24px;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .section-title h2 {
-      font-size: 30px;
-      font-weight: 900;
-      color: #0f172a;
-    }
-
-    /* گرید ۱۲ پایه */
-    .grades-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-    }
-
-    .grade-card {
-      background: white;
-      border-radius: 18px;
-      border: 1px solid #e2e8f0;
-      padding: 24px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
-    }
-
-    .grade-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
-      box-shadow: 0 12px 25px rgba(79, 70, 229, 0.1);
-    }
-
-    .grade-badge {
-      display: inline-block;
-      width: 55px;
-      height: 55px;
-      line-height: 55px;
-      background: #f1f5f9;
-      color: var(--primary);
-      font-size: 20px;
-      font-weight: 900;
-      border-radius: 50%;
-      margin-bottom: 15px;
-      transition: 0.3s;
-    }
-
-    .grade-card:hover .grade-badge {
-      background: var(--primary);
-      color: white;
-    }
-
-    .grade-card h3 {
-      font-size: 18px;
-      font-weight: 800;
-      color: #0f172a;
-      margin-bottom: 8px;
-    }
-
-    .grade-card p {
-      font-size: 13px;
-      color: var(--text-muted);
-    }
-
-    /* استایل کشوهای محتوایی (Accordion) */
-    .grade-content-panel {
-      grid-column: 1 / -1;
-      background: white;
-      border-radius: 20px;
-      border: 2px solid var(--primary);
-      padding: 30px;
-      display: none; /* در ابتدا مخفی است */
-      margin-top: 10px;
-      margin-bottom: 20px;
-      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.08);
-      animation: fadeIn 0.4s ease;
-    }
-
-    .panel-title {
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 25px;
-      border-bottom: 2px dashed #e2e8f0;
-      padding-bottom: 10px;
-    }
-
-    .sub-categories {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-    }
-
-    .category-box {
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 14px;
-      padding: 20px;
-    }
-
-    .category-box h4 {
-      font-size: 16px;
-      font-weight: 800;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .box-videos h4 { color: #3b82f6; }
-    .box-apps h4 { color: #ec4899; }
-    .box-docs h4 { color: #10b981; }
-
-    .content-list {
-      list-style: none;
-    }
-
-    .content-list li {
-      margin-bottom: 8px;
-    }
-
-    .content-list a {
-      font-size: 14px;
-      color: var(--text-main);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: 0.2s;
-    }
-
-    .content-list a:hover {
-      color: var(--primary);
-      padding-right: 4px;
-    }
-
-    footer {
-      background: #0f172a;
-      color: #94a3b8;
-      text-align: center;
-      padding: 30px 20px;
-      margin-top: 80px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 768px) {
-      .hero-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap');
+    body { font-family: 'Vazirmatn', sans-serif; background-color: #f8fafc; }
+    .glass { background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(12px); }
   </style>
 </head>
-<body oncontextmenu="return false">
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
 
-  <header>
-    <a href="#" class="logo">آموزش نوین ریاضی</a>
+  <!-- نوار بالای سایت (Header) -->
+  <header class="sticky top-0 z-50 glass border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="bg-indigo-600 text-white w-12 h-12 rounded-2xl flex items-center justify-center text-2xl font-black shadow-lg shadow-indigo-200">
+          ∑
+        </div>
+        <div>
+          <h1 class="text-xl font-black text-indigo-950">آموزش نوین ریاضی</h1>
+          <p class="text-xs text-slate-500 font-bold">پلتفرم هوشمند یادگیری ریاضیات</p>
+        </div>
+      </div>
+
+      <!-- وضعیت ورود و ثبت‌نام -->
+      <div id="auth-guest" class="flex items-center gap-2">
+        <button onclick="openModal('login-modal')" class="px-4 py-2 text-sm font-bold text-indigo-600 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition">ورود</button>
+        <button onclick="openModal('signup-modal')" class="px-4 py-2 text-sm font-bold text-white bg-indigo-600 rounded-xl hover:bg-indigo-700 shadow-md transition">ثبت‌نام</button>
+      </div>
+
+      <div id="auth-user" class="hidden flex items-center gap-3">
+        <div class="text-right">
+          <span class="text-xs text-slate-400 block">کاربر گرامی</span>
+          <span id="user-display" class="text-sm font-bold text-slate-800"></span>
+        </div>
+        <button onclick="logout()" class="px-3 py-1.5 text-xs font-bold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition">خروج</button>
+      </div>
+    </div>
   </header>
 
-  <!-- هیرو اصلی حاوی تصویر دانش‌آموز شاد -->
-  <section class="hero-container">
-    <div class="hero-text">
-      <h1><span>آموزش نوین ریاضی</span><br>لذت یادگیری از پایه تا کنکور</h1>
-      <p>اینجا مفاهیم سخت ریاضی به بازی‌های ساده، ویدیوهای جذاب و شبیه‌سازهای سه‌بعدی تبدیل می‌شوند تا یادگیری شیرین‌تر از همیشه باشد.</p>
+  <!-- بنر اصلی (Hero) -->
+  <section class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+    <div>
+      <span class="px-3 py-1 bg-indigo-100 text-indigo-700 rounded-full text-xs font-bold">آموزش تعاملی و مفهومی</span>
+      <h2 class="text-3xl md:text-5xl font-black text-slate-900 mt-4 leading-tight">
+        ریاضیات را با لذت، عمق و انگیزه یاد بگیرید!
+      </h2>
+      <p class="text-slate-600 mt-4 text-base md:text-lg leading-relaxed">
+        از پایه اول ابتدایی تا دوازدهم و کنکور سراسری، همراه با ویدیوهای آموزشی، جزوات استاندارد و اپلیکیشن‌های بازی‌محور ریاضی.
+      </p>
     </div>
-    <div class="hero-image-box">
-      <!-- اگر عکس را آپلود کردید، نام فایلش را در زیر جایگزین کنید -->
-      <img src="student.png" alt="یادگیری شاد ریاضی">
+    <div class="flex justify-center">
+      <img src="student.png" alt="آموزش نوین ریاضی" class="rounded-3xl shadow-xl border-4 border-white max-h-80 w-full object-cover">
     </div>
   </section>
 
-  <main class="main-content">
-    <div class="section-title">
-      <h2>پایه‌ی تحصیلی خود را انتخاب کنید</h2>
+  <!-- بخش پایه‌های تحصیلی -->
+  <section class="max-w-7xl mx-auto px-4 py-10 w-full">
+    <div class="text-center mb-8">
+      <h3 class="text-2xl font-black text-slate-900">پایه‌های تحصیلی</h3>
+      <p class="text-slate-500 text-sm mt-1">پایه مورد نظر خود را انتخاب کنید</p>
     </div>
-
-    <div class="grades-grid">
-      <!-- پایه‌های ۱ تا ۱۲ -->
-      <script>
-        const grades = [
-          "اول ابتدایی", "دوم ابتدایی", "سوم ابتدایی", 
-          "چهارم ابتدایی", "پنجم ابتدایی", "ششم ابتدایی", 
-          "هفتم دوره اول", "هشتم دوره اول", "نهم دوره اول", 
-          "دهم متوسطه دوم", "یازدهم متوسطه دوم", "دوازدهم متوسطه دوم"
-        ];
-        
-        grades.forEach((grade, index) => {
-          document.write(`
-            <div class="grade-card" onclick="toggleGradePanel(${index + 1})">
-              <div class="grade-badge">${index + 1}</div>
-              <h3>پایه ${grade}</h3>
-              <p>فیلم، اپلیکیشن، بازی و جزوات تخصصی</p>
-            </div>
-            
-            <div class="grade-content-panel" id="panel-grade-${index + 1}">
-              <div class="panel-title">📚 محتوای اختصاصی پایه ${grade}</div>
-              <div class="sub-categories">
-                
-                <div class="category-box box-videos">
-                  <h4>🎬 فیلم‌های آموزشی</h4>
-                  <ul class="content-list">
-                    <li><a href="#">🎥 فیلم تدریس مفهوم درس اول</a></li>
-                    <li><a href="#">🎥 ویدیو حل تمرین‌های کلیدی</a></li>
-                  </ul>
-                </div>
-                
-                <div class="category-box box-apps">
-                  <h4>🎮 اپلیکیشن و بازی</h4>
-                  <ul class="content-list">
-                    <li><a href="#">📱 شبیه‌ساز ریاضی تعاملی</a></li>
-                    <li><a href="#">🕹️ بازی ریاضی و تمرین مبحث</a></li>
-                  </ul>
-                </div>
-                
-                <div class="category-box box-docs">
-                  <h4>📄 جزوه و نمونه سوال</h4>
-                  <ul class="content-list">
-                    <li><a href="#">📝 خلاصه فرمول‌ها و نکات کلیدی</a></li>
-                    <li><a href="#">📄 نمونه سوالات امتحانی نوبت اول و دوم</a></li>
-                  </ul>
-                </div>
-
-              </div>
-            </div>
-          `);
-        });
-
-        function toggleGradePanel(gradeId) {
-          // بستن بقیه پنل‌ها در صورت تمایل، یا باز ماندن همزمان
-          const allPanels = document.querySelectorAll('.grade-content-panel');
-          allPanels.forEach(panel => {
-            if (panel.id !== 'panel-grade-' + gradeId) {
-              panel.style.display = 'none';
-            }
-          });
-
-          const activePanel = document.getElementById('panel-grade-' + gradeId);
-          if (activePanel.style.display === 'block') {
-            activePanel.style.display = 'none';
-          } else {
-            activePanel.style.display = 'block';
-            activePanel.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }
-      </script>
+    <div id="grades-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+      <!-- پایه‌ها توسط جاوااسکریپت ساخته می‌شوند -->
     </div>
-  </main>
+  </section>
 
-  <footer>
-    <p>تمامی حقوق برای آکادمی آموزش نوین ریاضی محفوظ است ©</p>
+  <!-- بخش اساتید و مدرسین -->
+  <section class="max-w-7xl mx-auto px-4 py-12 w-full border-t border-slate-200">
+    <div class="flex justify-between items-center mb-6">
+      <div>
+        <h3 class="text-2xl font-black text-slate-900">اساتید و همکاران آموزشی</h3>
+        <p class="text-slate-500 text-xs mt-1">تدریس توسط نخبگان و دبیران برتر ریاضی</p>
+      </div>
+      <button onclick="alert('برای ثبت‌نام به عنوان مدرس، لطفا ابتدا وارد حساب خود شوید.')" class="text-xs sm:text-sm font-bold text-indigo-600 bg-indigo-50 px-3 py-2 rounded-xl hover:bg-indigo-100 transition">
+        + همکاری به عنوان مدرس
+      </button>
+    </div>
+    
+    <div id="teachers-list" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+      <!-- کارت پیش‌فرض استاد افزالی -->
+      <div class="bg-white p-6 rounded-2xl border border-slate-200 text-center shadow-sm">
+        <div class="w-16 h-16 bg-indigo-600 text-white rounded-full mx-auto flex items-center justify-center text-xl font-bold mb-3 shadow-md">
+          استاد
+        </div>
+        <h4 class="font-bold text-slate-800 text-base">استاد افزالی</h4>
+        <p class="text-xs text-indigo-600 font-semibold mt-1">مدرس ریاضیات و هندسه تحلیلی</p>
+        <p class="text-xs text-slate-400 mt-2">طراح سوال و مؤلف محتوای تعاملی</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- فوتر -->
+  <footer class="bg-slate-900 text-white py-8 text-center text-xs text-slate-400 mt-12">
+    <p>© ۱۴۰۳ - تمامی حقوق متعلق به سامانه آموزش نوین ریاضی (افزالی‌مَث) است.</p>
   </footer>
 
+  <!-- پنجره مودال ورود -->
+  <div id="login-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl relative">
+      <button onclick="closeModal('login-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-slate-700">✕</button>
+      <h3 class="text-xl font-bold text-slate-900 mb-4 text-center">ورود به حساب</h3>
+      <input type="email" id="login-email" placeholder="آدرس ایمیل" class="w-full p-3 border rounded-xl mb-3 text-sm focus:outline-indigo-600">
+      <input type="password" id="login-pass" placeholder="رمز عبور" class="w-full p-3 border rounded-xl mb-4 text-sm focus:outline-indigo-600">
+      <button onclick="loginUser()" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">ورود</button>
+    </div>
+  </div>
+
+  <!-- پنجره مودال ثبت نام -->
+  <div id="signup-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full shadow-2xl relative">
+      <button onclick="closeModal('signup-modal')" class="absolute top-4 left-4 text-slate-400 hover:text-slate-700">✕</button>
+      <h3 class="text-xl font-bold text-slate-900 mb-4 text-center">ایجاد حساب جدید</h3>
+      <input type="email" id="signup-email" placeholder="آدرس ایمیل" class="w-full p-3 border rounded-xl mb-3 text-sm focus:outline-indigo-600">
+      <input type="password" id="signup-pass" placeholder="رمز عبور (حداقل ۶ نویسه)" class="w-full p-3 border rounded-xl mb-4 text-sm focus:outline-indigo-600">
+      <button onclick="registerUser()" class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition">ثبت‌نام</button>
+    </div>
+  </div>
+
+  <!-- منطق و کدهای عملکردی -->
   <script>
-    document.addEventListener('keydown', function (e) {
-      if (
-        e.key === 'F12' ||
-        (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'p' || e.key === 'a'))
-      ) {
-        e.preventDefault();
-        return false;
-      }
+    // ساخت خودکار دکمه‌های پایه‌های اول تا دوازدهم
+    const grades = ['اول', 'دوم', 'سوم', 'چهارم', 'پنجم', 'ششم', 'هفتم', 'هشتم', 'نهم', 'دهم', 'یازدهم', 'دوازدهم'];
+    const grid = GAPGPTMASKTOKENulw2tt8pyl8X0X'grades-grid');
+
+    grades.forEach((grade, idx) => {
+      const card = document.createElement('div');
+      card.className = "bg-white p-5 rounded-2xl border border-slate-200 text-center shadow-sm hover:shadow-md hover:border-indigo-400 cursor-pointer transition";
+      card.innerHTML = `
+        <div class="text-indigo-600 font-black text-2xl mb-1">${idx + 1}</div>
+        <div class="text-xs font-bold text-slate-700">پایه ${grade}</div>
+      `;
+      card.onclick = () => alert(`محتوای ریاضی پایه ${grade} به زودی قرار می‌گیرد!`);
+      grid.appendChild(card);
     });
+
+    function openModal(id) { secret-db4d36b8id).classList.remove('hidden'); }
+    function closeModal(id) { secret-db4d36b8id).classList.add('hidden'); }
+
+    // ثبت‌نام با ایمیل و پسورد
+    async function registerUser() {
+      const email = GAPGPTMASKTOKENulw2tt8pyl8X1X'signup-email').value;
+      const password = GAPGPTMASKTOKENulw2tt8pyl8X2X'signup-pass').value;
+      if(!email || !password) return alert('لطفاً تمام فیلدها را پر کنید.');
+
+      const { data, error } = await db.auth.signUp({ email, password });
+      if (error) {
+        alert('خطا: ' + error.message);
+      } else {
+        alert('ثبت‌نام شما انجام شد!');
+        closeModal('signup-modal');
+        checkUserSession();
+      }
+    }
+
+    // ورود به سیستم
+    async function loginUser() {
+      const email = GAPGPTMASKTOKENulw2tt8pyl8X3X'login-email').value;
+      const password = GAPGPTMASKTOKENulw2tt8pyl8X4X'login-pass').value;
+      if(!email || !password) return alert('لطفاً ایمیل و رمز را وارد کنید.');
+
+      const { data, error } = await db.auth.signInWithPassword({ email, password });
+      if (error) {
+        alert('خطا در ورود: ' + error.message);
+      } else {
+        alert('خوش آمدید!');
+        closeModal('login-modal');
+        checkUserSession();
+      }
+    }
+
+    // خروج از حساب
+    async function logout() {
+      await db.auth.signOut();
+      checkUserSession();
+    }
+
+    // بررسی وضعیت کاربر وارد شده
+    async function checkUserSession() {
+      const { data: { user } } = await db.auth.getUser();
+      const guestDiv = GAPGPTMASKTOKENulw2tt8pyl8X5X'auth-guest');
+      const userDiv = GAPGPTMASKTOKENulw2tt8pyl8X6X'auth-user');
+      const userDisplay = GAPGPTMASKTOKENulw2tt8pyl8X7X'user-display');
+
+      if (user) {
+        guestDiv.classList.add('hidden');
+        userDiv.classList.remove('hidden');
+        userDisplay.innerText = user.email.split('@')[0];
+      } else {
+        guestDiv.classList.remove('hidden');
+        userDiv.classList.add('hidden');
+      }
+    }
+
+    // اجرای خودکار در بدو ورود به صفحه
+    checkUserSession();
   </script>
 </body>
 </html>
