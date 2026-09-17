@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>َAfzaliMath | پلتفرم تخصصی ریاضیات</title>
+    <title>افزالی‌مَث | پلتفرم تخصصی ریاضیات</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -26,19 +26,28 @@
             <p class="text-lg text-slate-600 mb-8">با افزالی‌مَث، مفاهیم ریاضی را مفهومی و عمیق یاد بگیرید.</p>
         </div>
         <div class="flex justify-center">
-            <!-- تصویر دانش آموز -->
             <img src="student.png" alt="دانش‌آموز" class="w-full max-w-sm rounded-3xl shadow-2xl">
         </div>
     </section>
 
-    <!-- Sections (Grades & Professors) -->
+    <!-- Grades Section (Links added) -->
     <section class="max-w-6xl mx-auto px-6 py-10">
         <h3 class="text-2xl font-black mb-8">انتخاب مقطع تحصیلی</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div class="bg-white p-6 rounded-2xl shadow border text-center font-bold">ابتدایی</div>
-            <div class="bg-white p-6 rounded-2xl shadow border text-center font-bold">متوسطه اول</div>
-            <div class="bg-white p-6 rounded-2xl shadow border text-center font-bold">متوسطه دوم</div>
-            <div class="bg-white p-6 rounded-2xl shadow border text-center font-bold">کنکور</div>
+            <a href="grade.html?level=elementary" class="bg-white p-8 rounded-2xl shadow border hover:border-indigo-500 transition text-center font-bold">ابتدایی</a>
+            <a href="grade.html?level=middle1" class="bg-white p-8 rounded-2xl shadow border hover:border-indigo-500 transition text-center font-bold">متوسطه اول</a>
+            <a href="grade.html?level=middle2" class="bg-white p-8 rounded-2xl shadow border hover:border-indigo-500 transition text-center font-bold">متوسطه دوم</a>
+            <a href="grade.html?level=konkur" class="bg-white p-8 rounded-2xl shadow border hover:border-indigo-500 transition text-center font-bold">کنکور</a>
+        </div>
+    </section>
+
+    <!-- Professors Section -->
+    <section class="max-w-6xl mx-auto px-6 py-10">
+        <h3 class="text-2xl font-black mb-8">اساتید برتر</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-white p-6 rounded-2xl shadow border text-center">استاد ریاضی ۱</div>
+            <div class="bg-white p-6 rounded-2xl shadow border text-center">استاد ریاضی ۲</div>
+            <div class="bg-white p-6 rounded-2xl shadow border text-center">استاد ریاضی ۳</div>
         </div>
     </section>
 
@@ -54,10 +63,10 @@
         </div>
     </div>
 
-    <!-- Script -->
+    <!-- Correct JS -->
     <script>
         const SUPABASE_URL = "https://msoovfnbkgdqxvftlkl.supabase.co";
-        // ⚠️ فقط کلید خود را اینجا جایگذاری کنید ⚠️
+        // ⚠️ کلید خود را اینجا جایگزین کنید ⚠️
         const SUPABASE_ANON_KEY = "sb_publishable_ji8Qt0wzbNKwLScCjt4UEw_X2VZSLc1"; 
 
         const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
