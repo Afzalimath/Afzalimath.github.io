@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
+    <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://v1.fontapi.ir/css/Vazirmatn');
@@ -8,15 +9,16 @@
         .gradient-bg { background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); }
     </style>
 </head>
-<body class="min-h-screen flex">
+<body class="flex min-h-screen">
 
-    <!-- سایدبار -->
+    <!-- سایدبار (ثابت) -->
     <aside class="w-72 p-6 flex flex-col gradient-bg text-white shadow-2xl m-4 rounded-3xl">
         <div class="mb-10 text-center">
             <h1 class="text-3xl font-black italic tracking-tighter">Afzali<span class="text-yellow-300">MATH</span></h1>
         </div>
         
         <nav class="space-y-3 flex-1">
+            <p class="text-[10px] font-bold uppercase tracking-widest opacity-50 mb-3 px-4">انتخاب پایه</p>
             <button onclick="loadGrade('seventh')" class="w-full text-right p-4 rounded-2xl hover:bg-white/10 transition">هفتم ✨</button>
             <button onclick="loadGrade('eighth')" class="w-full text-right p-4 rounded-2xl hover:bg-white/10 transition">هشتم 🚀</button>
             <button onclick="loadGrade('ninth')" class="w-full text-right p-4 rounded-2xl hover:bg-white/10 transition">نهم 💎</button>
@@ -25,54 +27,52 @@
 
     <!-- محتوای اصلی -->
     <main class="flex-1 p-10">
-        <header class="mb-12">
-            <!-- این IDها خیلی مهم هستند -->
+        <!-- هدر -->
+        <header class="mb-8">
             <h2 id="grade-title" class="text-4xl font-extrabold text-slate-800">خوش آمدی قهرمان!</h2>
-            <p id="grade-desc" class="text-slate-500 mt-2">یکی از پایه‌ها را انتخاب کن تا شروع کنیم.</p>
+            <p id="grade-desc" class="text-slate-500 mt-2">لطفاً ابتدا پایه تحصیلی را از سمت راست انتخاب کن.</p>
         </header>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-8 rounded-3xl shadow-xl border-b-4 border-indigo-500">📄 جزوات</div>
-            <div class="bg-white p-8 rounded-3xl shadow-xl border-b-4 border-purple-500">🎥 فیلم‌ها</div>
-            <div class="bg-white p-8 rounded-3xl shadow-xl border-b-4 border-yellow-500">🎮 تمرین</div>
+        <!-- دکمه‌های انتخاب محتوا -->
+        <div class="flex gap-4 mb-8">
+            <button onclick="openVault('pdf')" class="px-6 py-3 bg-indigo-500 text-white rounded-xl hover:bg-indigo-600 transition">📄 مشاهده جزوه</button>
+            <button onclick="openVault('video')" class="px-6 py-3 bg-purple-500 text-white rounded-xl hover:bg-purple-600 transition">🎥 ویدیو آموزشی</button>
+            <button onclick="openVault('game')" class="px-6 py-3 bg-yellow-500 text-white rounded-xl hover:bg-yellow-600 transition">🎮 بازی ریاضی</button>
+        </div>
+
+        <!-- گاوصندوق محتوا -->
+        <div id="content-vault" class="bg-white p-8 rounded-3xl shadow-2xl min-h-[400px] border-t-8 border-slate-200">
+            <p class="text-slate-400 text-center mt-20">هنوز محتوایی انتخاب نشده...</p>
         </div>
     </main>
 
-   <!-- محتوای اصلی (تغییر یافته) -->
-<main class="flex-1 p-10">
-    <header class="mb-8">
-        <h2 id="grade-title" class="text-4xl font-extrabold text-slate-800">خوش آمدی قهرمان!</h2>
-    </header>
+    <script>
+        // دیتای پایه
+        const appData = {
+            seventh: { title: "ریاضیات پایه هفتم", desc: "شروع ماجراجویی ریاضی!" },
+            eighth: { title: "ریاضیات پایه هشتم", desc: "قدم‌های محکم‌تر در ریاضی!" },
+            ninth: { title: "ریاضیات پایه نهم", desc: "فتح قله‌های هندسه!" }
+        };
 
-    <!-- این همان «گاوصندوق» است که محتوا داخلش لود می‌شود -->
-    <div id="content-vault" class="bg-white p-8 rounded-3xl shadow-2xl min-h-[400px] border-t-8 border-indigo-500">
-        <p class="text-slate-400 text-center mt-20">لطفاً یک پایه و سپس یک نوع محتوا را انتخاب کن...</p>
-    </div>
-</main>
+        // ویوِرهای امن
+        const viewers = {
+            pdf: `<div class="text-center"><h3 class="text-2xl mb-4 font-bold">📖 نمایشگرِ جزوه</h3><div class="h-64 bg-slate-100 flex items-center justify-center rounded-2xl border-2 border-dashed border-slate-300">اینجا قراره PDF.js رندر بشه</div></div>`,
+            video: `<div class="text-center"><h3 class="text-2xl mb-4 font-bold">🎥 پلیرِ درس</h3><div class="h-64 bg-black rounded-2xl flex items-center justify-center text-white">پخش‌کننده HLS محافظت شده</div></div>`,
+            game: `<div class="text-center"><h3 class="text-2xl mb-4 font-bold">🎮 محیطِ بازی</h3><iframe sandbox="allow-scripts" class="w-full h-64 rounded-2xl" src="about:blank"></iframe></div>`
+        };
 
-<script>
-    // تنظیمات محتوا
-    const viewers = {
-        pdf: `<div class="text-center"><h3 class="text-2xl mb-4">📖 نمایشگرِ جزوه</h3><div class="h-64 bg-slate-100 flex items-center justify-center rounded-2xl border-2 border-dashed border-slate-300">در حال بارگذاری PDF.js...</div></div>`,
-        video: `<div class="text-center"><h3 class="text-2xl mb-4">🎥 پلیرِ درس</h3><div class="h-64 bg-black rounded-2xl flex items-center justify-center text-white">پخش‌کننده HLS (محافظت شده)</div></div>`,
-        game: `<div class="text-center"><h3 class="text-2xl mb-4">🎮 محیطِ بازی</h3><iframe sandbox="allow-scripts" class="w-full h-64 rounded-2xl" src="about:blank"></iframe></div>`
-    };
+        // توابع اصلی
+        function loadGrade(gradeKey) {
+            const data = appData[gradeKey];
+            document.getElementById('grade-title').innerText = data.title;
+            document.getElementById('grade-desc').innerText = data.desc;
+            document.getElementById('content-vault').innerHTML = '<p class="text-center mt-20 text-slate-400">حالا نوع محتوا را انتخاب کن...</p>';
+        }
 
-    // تابعِ تزریقِ محتوا به گاوصندوق
-    function openVault(type) {
-        const vault = document.getElementById('content-vault');
-        vault.innerHTML = viewers[type]; // تزریقِ ویوِرهای امن
-    }
-
-    // آپدیت کردنِ تیتر و ریست کردنِ گاوصندوق
-    function loadGrade(gradeKey) {
-        const titles = { seventh: "ریاضیات هفتم", eighth: "ریاضیات هشتم", ninth: "ریاضیات نهم" };
-        document.getElementById('grade-title').innerText = titles[gradeKey];
-        
-        // وقتی پایه عوض شد، گاوصندوق را پاک کن تا کاربر دوباره انتخاب کند
-        document.getElementById('content-vault').innerHTML = '<p class="text-center mt-20">حالا نوع محتوا را انتخاب کن...</p>';
-    }
-</script>
-
+        function openVault(type) {
+            const vault = document.getElementById('content-vault');
+            vault.innerHTML = viewers[type];
+        }
+    </script>
 </body>
 </html>
