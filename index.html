@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AfzaliMATH | سیستم آموزشی</title>
+    <title>AfzaliMATH | سیستم هوشمند</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://v1.fontapi.ir/css/Vazirmatn');
@@ -31,10 +31,10 @@
             <p id="view-subtitle" class="text-slate-500 mt-2">یک پایه تحصیلی را از سمت راست انتخاب کنید.</p>
         </div>
         
-        <div id="content-container" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <div class="col-span-full text-center p-20 text-slate-400">
-                <p class="text-xl">آماده شروع یادگیری؟</p>
-            </div>
+        <!-- این کانتینر در ابتدا تصویر دانش‌آموز را دارد -->
+        <div id="content-container" class="flex flex-col items-center justify-center h-[500px]">
+            <img src="student.png" alt="Student" class="w-64 mb-6 animate-bounce">
+            <p class="text-slate-500 text-lg">سلام! آماده یادگیری هستی؟ پایه خودت رو انتخاب کن.</p>
         </div>
     </main>
 
@@ -45,15 +45,17 @@
             ninth: { title: "ریاضی نهم", chapters: 8 }
         };
 
+        // تغییر ساختار برای جلوگیری از باگ‌های قبلی
         function renderChapters(gradeKey) {
             const data = curriculum[gradeKey];
             document.getElementById('view-title').innerText = data.title;
             document.getElementById('view-subtitle').innerText = "انتخاب فصل:";
             
-            let html = "";
+            let html = `<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">`;
             for(let i=1; i <= data.chapters; i++) {
                 html += `<button onclick="renderLessons('${gradeKey}', ${i})" class="bg-white p-6 rounded-2xl shadow-md border-b-4 border-indigo-400 hover:scale-105 transition text-center font-bold text-slate-700">فصل ${i}</button>`;
             }
+            html += `</div>`;
             document.getElementById('content-container').innerHTML = html;
         }
 
@@ -61,34 +63,35 @@
             document.getElementById('view-title').innerText = `فصل ${chapterNum}`;
             document.getElementById('view-subtitle').innerText = "انتخاب درس:";
             
-            let html = "";
-            for(let j=1; j <= 4; j++) {
-                html += `<button onclick="showViewer('${gradeKey}', ${chapterNum}, ${j})" class="bg-white p-6 rounded-2xl shadow-md border-b-4 border-purple-400 hover:scale-105 transition text-center font            document.getElementById('view-title').innerText = `فصل ${chapterNum}`;
-            document.getElementById('view-subtitle').innerText = "انتخاب درس:";
-            
-            let html = "";
+            let html = `<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full">`;
             for(let j=1; j <= 4; j++) {
                 html += `<button onclick="showViewer('${gradeKey}', ${chapterNum}, ${j})" class="bg-white p-6 rounded-2xl shadow-md border-b-4 border-purple-400 hover:scale-105 transition text-center font-bold text-slate-700">درس ${j}</button>`;
             }
+            html += `</div>`;
             document.getElementById('content-container').innerHTML = html;
         }
 
         function showViewer(grade, chapter, lesson) {
             document.getElementById('view-title').innerText = `فصل ${chapter} - درس ${lesson}`;
-            document.getElementById('view-subtitle').innerText = "محتوای آموزشی را انتخاب کنید:";
+            document.getElementById('view-subtitle').innerText = "محتوای آموزشی:";
             
             document.getElementById('content-container').innerHTML = `
-                <div class="col-span-full bg-white p-8 rounded-3xl shadow-xl border-t-8 border-indigo-500">
+                <div class="bg-white p-8 rounded-3xl shadow-xl border-t-8 border-indigo-500 w-full">
                     <div class="flex gap-4 mb-8 flex-wrap">
-                        <button onclick="loadContent('pdf', 'path/to/pdf')" class="bg-indigo-500 text-white px-6 py-3 rounded-xl hover:bg-indigo-600 transition shadow-lg">📄 جزوه PDF</button>
+                        <button onclick="loadContent('pdf', '#')" class="bg-indigo-500 text-white px-6 py-3 rounded-xl hover:bg-indigo-600 transition shadow-lg">📄 جزوه PDF</button>
                         <button onclick="loadContent('video', 'https://www.youtube.com/embed/dQw4w9WgXcQ')" class="bg-purple-500 text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition shadow-lg">🎥 فیلم آموزشی</button>
-                        <button onclick="loadContent('app', 'apps/my_game.html')" class="bg-emerald-500 text-white px-6 py-3 rounded-xl hover:bg-emerald-600 transition shadow-lg">🎮 بازیtype === 'pdf') {
-                area.innerHTML = `<iframe src="${source}" class="w-full h-full"></iframe>`;
-            } else if (type === 'video') {
-                area.innerHTML = `<iframe src="${source}" class="w-full h-full" allowfullscreen></iframe>`;
-            } else if (type === 'app') {
-                area.innerHTML = `<iframe src="${source}" class="w-full h-full"></iframe>`;
-            }
+                        <button onclick="loadContent('app', 'apps/interactive.html')" class="bg-emerald-500 text-white px-6 py-3 rounded-xl hover:bg-emerald-600 transition shadow-lg">🎮 بازی و اپلیکیشن</button>
+                    </div>
+                    <div id="viewer-area" class="h-[400px] w-full bg-slate-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-slate-300 overflow-hidden">
+                        <p class="text-slate-400">یک گزینه را انتخاب کنید.</p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function loadContent(type, source) {
+            const area = document.getElementById('viewer-area');
+            area.innerHTML = `<iframe src="${source}" class="w-full h-full border-0"></iframe>`;
         }
     </script>
 </body>
