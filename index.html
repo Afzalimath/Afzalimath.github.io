@@ -2,28 +2,56 @@
 <html lang="fa" dir="rtl">
 <head>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://v1.fontapi.ir/css/Vazirmatn');
+        body { font-family: 'Vazirmatn', sans-serif; }
+    </style>
 </head>
-<body class="bg-gray-100 h-screen flex">
+<body class="bg-slate-50 min-h-screen flex">
 
-    <!-- منوی کناری (Sidebar) -->
-    <aside class="w-64 bg-slate-800 text-white p-6">
-        <h1 class="text-2xl font-bold mb-8">AfzaliMATH</h1>
-        <nav class="space-y-4">
-            <a href="#" class="block p-2 hover:bg-slate-700 rounded">جزوات (PDF)</a>
-            <a href="#" class="block p-2 hover:bg-slate-700 rounded">فیلم‌های آموزشی</a>
-            <a href="#" class="block p-2 hover:bg-slate-700 rounded">بازی‌های ریاضی</a>
-        </nav>
+    <!-- سایدبار حرفه‌ای -->
+    <aside class="w-72 bg-slate-900 text-slate-200 p-6 flex flex-col justify-between">
+        <div>
+            <h1 class="text-2xl font-black text-white mb-10 tracking-tighter">Afzali<span class="text-indigo-400">MATH</span></h1>
+            <nav class="space-y-3">
+                <button class="w-full text-right p-3 rounded-lg hover:bg-slate-800 transition">خانه</button>
+                <!-- انتخاب پایه -->
+                <div class="pt-4 border-t border-slate-700">
+                    <p class="text-xs text-slate-500 mb-2 px-3 uppercase tracking-wider">پایه‌ها</p>
+                    <button class="w-full text-right p-3 rounded-lg hover:bg-slate-800">پایه هفتم</button>
+                    <button class="w-full text-right p-3 rounded-lg hover:bg-slate-800">پایه هشتم</button>
+                    <button class="w-full text-right p-3 rounded-lg hover:bg-slate-800">پایه نهم</button>
+                </div>
+            </nav>
+        </div>
+        <!-- دکمه ادمین (مخفی برای دانش‌آموز) -->
+        <button class="text-sm text-slate-500 hover:text-white transition">پنل مدیریت</button>
     </aside>
 
-    <!-- منطقه اصلی (Content Vault) -->
-    <main class="flex-1 p-8">
-        <header class="bg-white p-4 shadow-sm rounded-lg mb-6">
-            <h2 class="text-xl">خوش آمدید، دانش‌آموز عزیز!</h2>
+    <!-- منطقه محتوا -->
+    <main class="flex-1 p-10">
+        <header class="flex justify-between items-center mb-10">
+            <h2 class="text-3xl font-bold text-slate-800">داشبورد ریاضی</h2>
+            <div class="bg-white px-4 py-2 rounded-full shadow-sm border border-slate-200 text-sm">
+                سلام، کاربر عزیز 👋
+            </div>
         </header>
 
-        <!-- اینجا همان جایی است که محتوای امن بارگذاری می‌شود -->
-        <div id="content-vault" class="bg-white h-full rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center">
-            <p class="text-gray-400">محتوا در این بخش نمایش داده می‌شود</p>
+        <!-- بخشِ اصلی نمایش محتوا -->
+        <div id="content-view" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- کارت‌های نمونه -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                <h3 class="font-bold text-lg mb-2">جزوات آموزشی</h3>
+                <p class="text-slate-500 text-sm">مشاهده جزوات فصل اول تا آخر</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                <h3 class="font-bold text-lg mb-2">فیلم‌های آموزشی</h3>
+                <p class="text-slate-500 text-sm">تدریسِ مفهومی مباحث</p>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition">
+                <h3 class="font-bold text-lg mb-2">تمرین و بازی</h3>
+                <p class="text-slate-500 text-sm">تمرینِ تعاملی ریاضی</p>
+            </div>
         </div>
     </main>
 
