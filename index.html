@@ -98,6 +98,10 @@
         }
 
         function showViewer(grade, chapter, lesson) {
+            // تبدیل کلمات به اعداد برای مسیردهی
+            const gradeMap = { seventh: 7, eighth: 8, ninth: 9 };
+            const g = gradeMap[grade];
+            
             document.getElementById('view-title').innerText = `فصل ${chapter} - درس ${lesson}`;
             document.getElementById('view-subtitle').innerText = "محتوای آموزشی:";
             
@@ -105,9 +109,9 @@
             document.getElementById('content-container').innerHTML = `
                 <div class="w-full h-full space-y-6">
                     <div class="flex gap-4 flex-wrap">
-                        <button onclick="loadContent('pdf', 'path/to/your/pdf.pdf')" class="bg-indigo-500 text-white px-6 py-3 rounded-xl hover:bg-indigo-600 transition shadow-lg font-bold">📄 جزوه PDF</button>
-                        <button onclick="loadContent('video', 'https://www.aparat.com/video/video/embed/videohash/YOUR_VIDEO_HASH/vt/frame')" class="bg-purple-500 text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition shadow-lg font-bold">🎥 فیلم آموزشی</button>
-                        <button onclick="loadContent('app', 'apps/interactive.html')" class="bg-emerald-500 text-white px-6 py-3 rounded-xl hover:bg-emerald-600 transition shadow-lg font-bold">🎮 بازی و اپلیکیشن</button>
+                        <button onclick="loadContent('pdf', 'pdf/${g}/f${chapter}/d${lesson}')" class="bg-indigo-500 text-white px-6 py-3 rounded-xl hover:bg-indigo-600 transition shadow-lg font-bold">📄 جزوه PDF</button>
+                        <button onclick="loadContent('video', 'video/${g}/f${chapter}/d${lesson}')" class="bg-purple-500 text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition shadow-lg font-bold">🎥 فیلم آموزشی</button>
+                        <button onclick="loadContent('app', 'app/${g}/f${chapter}/d${lesson}')" class="bg-emerald-500 text-white px-6 py-3 rounded-xl hover:bg-emerald-600 transition shadow-lg font-bold">🎮 بازی و اپلیکیشن</button>
                     </div>
                     <div id="viewer-area" class="h-[480px] w-full bg-slate-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-slate-300 overflow-hidden">
                         <p class="text-slate-400 font-bold">یکی از دکمه‌های بالا را برای مشاهده محتوا انتخاب کنید.</p>
@@ -118,11 +122,8 @@
 
         function loadContent(type, source) {
             const area = document.getElementById('viewer-area');
-            if (source.includes('path/to/your') || source.includes('YOUR_VIDEO_HASH')) {
-                area.innerHTML = `<div class="text-center p-10"><p class="text-amber-600 font-bold mb-2">محتوا هنوز متصل نشده است</p><p class="text-slate-500 text-sm">مسیر فایل یا لینک مربوطه را در کد قرار دهید.</p></div>`;
-            } else {
-                area.innerHTML = `<iframe src="${source}" class="w-full h-full border-0 rounded-2xl"></iframe>`;
-            }
+            // در اینجا می‌توانیم منطقِ بارگذاریِ فایل بر اساسِ source را گسترش دهیم
+            area.innerHTML = `<div class="text-center p-10"><p class="text-indigo-600 font-bold mb-2">در حال بارگذاری مسیر:</p><code class="bg-slate-200 p-2 rounded">${source}</code></div>`;
         }
     </script>
 </body>
