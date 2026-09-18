@@ -1,114 +1,31 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AfzaliMATH | یادگیری نوین ریاضی</title>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;700;900&display=swap');
-        body { font-family: 'Vazirmatn', sans-serif; background-color: #f8fafc; }
-    </style>
 </head>
-<body>
+<body class="bg-gray-100 h-screen flex">
 
-    <!-- Header -->
-    <header class="p-6 max-w-6xl mx-auto flex justify-between items-center">
-        <h1 class="text-3xl font-black text-indigo-700">AfzaliMATH</h1>
-        <div id="auth-zone">
-            <button onclick="document.getElementById('login-modal').classList.remove('hidden')" 
-                    class="px-4 py-2 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700">ورود مدیر</button>
+    <!-- منوی کناری (Sidebar) -->
+    <aside class="w-64 bg-slate-800 text-white p-6">
+        <h1 class="text-2xl font-bold mb-8">AfzaliMATH</h1>
+        <nav class="space-y-4">
+            <a href="#" class="block p-2 hover:bg-slate-700 rounded">جزوات (PDF)</a>
+            <a href="#" class="block p-2 hover:bg-slate-700 rounded">فیلم‌های آموزشی</a>
+            <a href="#" class="block p-2 hover:bg-slate-700 rounded">بازی‌های ریاضی</a>
+        </nav>
+    </aside>
+
+    <!-- منطقه اصلی (Content Vault) -->
+    <main class="flex-1 p-8">
+        <header class="bg-white p-4 shadow-sm rounded-lg mb-6">
+            <h2 class="text-xl">خوش آمدید، دانش‌آموز عزیز!</h2>
+        </header>
+
+        <!-- اینجا همان جایی است که محتوای امن بارگذاری می‌شود -->
+        <div id="content-vault" class="bg-white h-full rounded-2xl border-2 border-dashed border-gray-300 flex items-center justify-center">
+            <p class="text-gray-400">محتوا در این بخش نمایش داده می‌شود</p>
         </div>
-        <div id="admin-zone" class="hidden text-green-600 font-bold bg-green-50 px-4 py-2 rounded-lg">پنل مدیریت فعال</div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-12">
-        <div>
-            <h2 class="text-4xl font-black text-slate-900 mb-4">ریاضی را بصورت مدرن و جذاب یاد بگیر!</h2>
-            <p class="text-slate-600 text-lg">از پایه اول تا دوازدهم؛ یک مسیر منظم و شاد برای یادگیری عمیق.</p>
-        </div>
-        <img src="student.png" alt="دانش آموز" class="w-64 h-auto rounded-3xl shadow-2xl">
-    </section>
-
-    <!-- 12 Grades Section: 4 Groups of 3 -->
-    <main class="max-w-6xl mx-auto px-6 pb-20">
-        
-        <!-- گروه اول -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <button class="bg-blue-100 p-6 rounded-2xl border-2 border-blue-200 hover:scale-105 transition font-bold text-blue-900">پایه اول</button>
-            <button class="bg-blue-100 p-6 rounded-2xl border-2 border-blue-200 hover:scale-105 transition font-bold text-blue-900">پایه دوم</button>
-            <button class="bg-blue-100 p-6 rounded-2xl border-2 border-blue-200 hover:scale-105 transition font-bold text-blue-900">پایه سوم</button>
-        </div>
-
-        <!-- گروه دوم -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <button class="bg-teal-100 p-6 rounded-2xl border-2 border-teal-200 hover:scale-105 transition font-bold text-teal-900">پایه چهارم</button>
-            <button class="bg-teal-100 p-6 rounded-2xl border-2 border-teal-200 hover:scale-105 transition font-bold text-teal-900">پایه پنجم</button>
-            <button class="bg-teal-100 p-6 rounded-2xl border-2 border-teal-200 hover:scale-105 transition font-bold text-teal-900">پایه ششم</button>
-        </div>
-
-        <!-- گروه سوم -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            <button class="bg-amber-100 p-6 rounded-2xl border-2 border-amber-200 hover:scale-105 transition font-bold text-amber-900">پایه هفتم</button>
-            <button class="bg-amber-100 p-6 rounded-2xl border-2 border-amber-200 hover:scale-105 transition font-bold text-amber-900">پایه هشتم</button>
-            <button class="bg-amber-100 p-6 rounded-2xl border-2 border-amber-200 hover:scale-105 transition font-bold text-amber-900">پایه نهم</button>
-        </div>
-
-        <!-- گروه چهارم -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <button class="bg-rose-100 p-6 rounded-2xl border-2 border-rose-200 hover:scale-105 transition font-bold text-rose-900">پایه دهم</button>
-            <button class="bg-rose-100 p-6 rounded-2xl border-2 border-rose-200 hover:scale-105 transition font-bold text-rose-900">پایه یازدهم</button>
-            <button class="bg-rose-100 p-6 rounded-2xl border-2 border-rose-200 hover:scale-105 transition font-bold text-rose-900">پایه دوازدهم</button>
-        </div>
-
     </main>
 
-    <!-- Login Modal -->
-    <div id="login-modal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white p-8 rounded-3xl max-w-sm w-full">
-            <h3 class="text-xl font-black mb-6">ورود به پنل مدیریت</h3>
-            <input type="email" id="email" placeholder="ایمیل" class="w-full p-4 bg-slate-100 rounded-xl mb-3">
-            <input type="password" id="password" placeholder="رمز عبور" class="w-full p-4 bg-slate-100 rounded-xl mb-6">
-            <button onclick="loginAdmin()" class="w-full py-4 bg-indigo-600 text-white rounded-xl font-bold">ورود</button>
-        </div>
-    </div>
-
-   <script>
-  // اول متغیرهای سراسری را تعریف می‌کنیم
-  const SUPABASE_URL = "https://xefkmoeowglrribkunnu.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_UlGljz2ozsvvs9cSxeHyLw_QohH6tbP"; 
-  let db; // تعریف متغیر به صورت سراسری
-
-  document.addEventListener('DOMContentLoaded', () => {
-    // مقداردهی بعد از لود کامل صفحه
-    db = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    
-    // حالا که db آماده شد، چک کن
-    checkSession();
-  });
-
-  async function loginAdmin() {
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
-    
-    // چک کن که db حتما مقداردهی شده باشد
-    if (!db) return alert("خطا: اتصال دیتابیس برقرار نشده است.");
-
-    const { error } = await db.auth.signInWithPassword({ email, password });
-    if (error) alert("خطا: " + error.message);
-    else { alert("خوش آمدید مدیر!"); location.reload(); }
-  }
-
-  async function checkSession() {
-    if (!db) return; // محافظت از اجرا قبل از آماده‌سازی
-    const { data: { user } } = await db.auth.getUser();
-    if (user) {
-      document.getElementById('auth-zone').classList.add('hidden');
-      document.getElementById('admin-zone').classList.remove('hidden');
-    }
-  }
-</script>
 </body>
 </html>
