@@ -3,21 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AfzaliMATH | سیستم هوشمند</title>
+    <title>AfzaliMATH | سیستم هوشمند آموزشی</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://v1.fontapi.ir/css/Vazirmatn');
         body { font-family: 'Vazirmatn', sans-serif; background-color: #f1f5f9; }
         .gradient-bg { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
-        
-        /* افکت نرم Fade-in */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            animation: fadeIn 0.8s ease-out forwards;
-        }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="flex min-h-screen">
@@ -40,13 +33,9 @@
             <p id="view-subtitle" class="text-slate-500 mt-2">یک پایه تحصیلی را از سمت راست انتخاب کنید.</p>
         </div>
         
-        <!-- کانتینر اصلی -->
         <div id="content-container" class="flex flex-col items-center justify-center min-h-[600px] bg-white rounded-3xl p-10 shadow-lg fade-in">
-            <img src="student.png" alt="Student" class="w-[600px] h-[600px] object-cover rounded-3xl shadow-2xl mb-8 border-[12px] border-indigo-50">
-            <div class="text-center space-y-3 max-w-xl">
-                <h3 class="text-3xl font-black text-slate-800">آماده‌ی فتحِ قله‌های ریاضی هستی؟ 🌟</h3>
-                <p class="text-slate-500 text-lg">هر مسئله‌ای که حل می‌کنی، یک پله بالاتر می‌روی. <span class="font-bold text-indigo-600">پایه خودت را انتخاب کن تا شروع کنیم!</span></p>
-            </div>
+            <!-- این بخش به صورت داینامیک پر می‌شود -->
+            <h3 class="text-2xl font-black text-slate-400">شروع یادگیری با انتخاب پایه...</h3>
         </div>
     </main>
 
@@ -57,17 +46,16 @@
             ninth: { title: "ریاضی نهم", chapters: 8 }
         };
 
+        const gradeMap = { seventh: 7, eighth: 8, ninth: 9 };
+
         function renderHome() {
             document.getElementById('view-title').innerText = "به پنل آموزشی خوش آمدید";
             document.getElementById('view-subtitle').innerText = "یک پایه تحصیلی را از سمت راست انتخاب کنید.";
-            document.getElementById('content-container').className = "flex flex-col items-center justify-center min-h-[600px] bg-white rounded-3xl p-10 shadow-lg fade-in";
             document.getElementById('content-container').innerHTML = `
-                <img src="student.png" alt="Student" class="w-[600px] h-[600px] object-cover rounded-3xl shadow-2xl mb-8 border-[12px] border-indigo-50">
-                <div class="text-center space-y-3 max-w-xl">
+                <div class="text-center p-10 space-y-4">
                     <h3 class="text-3xl font-black text-slate-800">آماده‌ی فتحِ قله‌های ریاضی هستی؟ 🌟</h3>
-                    <p class="text-slate-500 text-lg">هر مسئله‌ای که حل می‌کنی، یک پله بالاتر می‌روی. <span class="font-bold text-indigo-600">پایه خودت را انتخاب کن تا شروع کنیم!</span></p>
-                </div>
-            `;
+                    <p class="text-slate-500 text-lg">پایه خودت را انتخاب کن تا ماجراجویی شروع شود!</p>
+                </div>`;
         }
 
         function renderChapters(gradeKey) {
@@ -80,7 +68,6 @@
                 html += `<button onclick="renderLessons('${gradeKey}', ${i})" class="bg-indigo-50 p-6 rounded-2xl shadow-sm border-2 border-indigo-200 hover:bg-indigo-100 transition text-center font-bold text-slate-700">فصل ${i}</button>`;
             }
             html += `</div>`;
-            document.getElementById('content-container').className = "grid w-full fade-in";
             document.getElementById('content-container').innerHTML = html;
         }
 
@@ -93,18 +80,14 @@
                 html += `<button onclick="showViewer('${gradeKey}', ${chapterNum}, ${j})" class="bg-purple-50 p-6 rounded-2xl shadow-sm border-2 border-purple-200 hover:bg-purple-100 transition text-center font-bold text-slate-700">درس ${j}</button>`;
             }
             html += `</div>`;
-            document.getElementById('content-container').className = "grid w-full fade-in";
             document.getElementById('content-container').innerHTML = html;
         }
 
         function showViewer(grade, chapter, lesson) {
-            const gradeMap = { seventh: 7, eighth: 8, ninth: 9 };
             const g = gradeMap[grade];
-            
             document.getElementById('view-title').innerText = `فصل ${chapter} - درس ${lesson}`;
             document.getElementById('view-subtitle').innerText = "محتوای آموزشی:";
             
-            document.getElementById('content-container').className = "w-full fade-in";
             document.getElementById('content-container').innerHTML = `
                 <div class="w-full h-full space-y-6">
                     <div class="flex gap-4 flex-wrap">
@@ -112,8 +95,8 @@
                         <button onclick="loadContent('video', 'video/${g}/f${chapter}/d${lesson}')" class="bg-purple-500 text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition shadow-lg font-bold">🎥 فیلم آموزشی</button>
                         <button onclick="loadContent('app', 'app/${g}/f${chapter}/d${lesson}')" class="bg-emerald-500 text-white px-6 py-3 rounded-xl hover:bg-emerald-600 transition shadow-lg font-bold">🎮 بازی و اپلیکیشن</button>
                     </div>
-                    <div id="viewer-area" class="h-[480px] w-full bg-slate-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-slate-300 overflow-hidden">
-                        <p class="text-slate-400 font-bold">یکی از دکمه‌های بالا را برای مشاهده محتوا انتخاب کنید.</p>
+                    <div id="viewer-area" class="h-[500px] w-full bg-slate-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-slate-300 overflow-hidden">
+                        <p class="text-slate-400 font-bold">یکی از دکمه‌های بالا را انتخاب کنید.</p>
                     </div>
                 </div>
             `;
@@ -123,11 +106,11 @@
             const area = document.getElementById('viewer-area');
             
             if (type === 'pdf') {
-                // اگر نوع محتوا PDF است، یک iframe بساز
-                area.innerHTML = `<iframe src="${source}" class="w-full h-full border-0"></iframe>`;
+                // پارامترهای امنیتی برای مخفی کردن تولبار PDF
+                const viewerParams = "#toolbar=0&navpanes=0&scrollbar=0&view=FitH";
+                area.innerHTML = `<iframe src="${source}${viewerParams}" class="w-full h-full border-0"></iframe>`;
             } else {
-                // برای بقیه موارد فعلاً همان متن قبلی را نمایش بده
-                area.innerHTML = `<div class="text-center p-10"><p class="text-indigo-600 font-bold mb-2">در حال بارگذاری مسیر:</p><code class="bg-slate-200 p-2 rounded">${source}</code></div>`;
+                area.innerHTML = `<div class="text-center p-10"><p class="text-slate-600 font-bold">در حال بارگذاری محتوای ${type}:</p><code class="bg-slate-200 p-2 rounded mt-2 block">${source}</code></div>`;
             }
         }
     </script>
