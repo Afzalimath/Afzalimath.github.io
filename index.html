@@ -10,101 +10,51 @@
 </head>
 <body class="min-h-screen flex">
 
-    <!-- سایدبار شاد و مدرن -->
+    <!-- سایدبار -->
     <aside class="w-72 p-6 flex flex-col gradient-bg text-white shadow-2xl m-4 rounded-3xl">
         <div class="mb-10 text-center">
             <h1 class="text-3xl font-black italic tracking-tighter">Afzali<span class="text-yellow-300">MATH</span></h1>
-            <p class="text-xs opacity-70 mt-1">آکادمی ریاضیات هوشمند</p>
         </div>
         
         <nav class="space-y-3 flex-1">
-            <button class="w-full flex items-center p-4 rounded-2xl bg-white/10 hover:bg-white/20 transition backdrop-blur-sm">
-                🏠 داشبورد
-            </button>
-            <div class="pt-6">
-                <p class="text-[10px] font-bold uppercase tracking-widest opacity-50 mb-3 px-4">انتخاب پایه</p>
-                <button class="w-full text-right p-4 rounded-2xl hover:bg-white/10 transition">هفتم ✨</button>
-                <button class="w-full text-right p-4 rounded-2xl hover:bg-white/10 transition">هشتم 🚀</button>
-                <button class="w-full text-right p-4 rounded-2xl hover:bg-white/10 transition">نهم 💎</button>
-            </div>
+            <button onclick="loadGrade('seventh')" class="w-full text-right p-4 rounded-2xl hover:bg-white/10 transition">هفتم ✨</button>
+            <button onclick="loadGrade('eighth')" class="w-full text-right p-4 rounded-2xl hover:bg-white/10 transition">هشتم 🚀</button>
+            <button onclick="loadGrade('ninth')" class="w-full text-right p-4 rounded-2xl hover:bg-white/10 transition">نهم 💎</button>
         </nav>
-
-        <button class="text-xs opacity-50 hover:opacity-100 transition">⚙️ پنل مدیریت</button>
     </aside>
 
     <!-- محتوای اصلی -->
-    <main class="flex-1 p-10 overflow-y-auto">
-        <header class="flex justify-between items-center mb-12">
-            <div>
-                <h2 class="text-4xl font-extrabold text-slate-800">سلام قهرمان! 👋</h2>
-                <p class="text-slate-500 mt-2">امروز می‌خوایم چه مبحثی رو یاد بگیریم؟</p>
-            </div>
-            <div class="w-16 h-16 rounded-full bg-indigo-100 border-4 border-white shadow-lg flex items-center justify-center">
-                🧠
-            </div>
+    <main class="flex-1 p-10">
+        <header class="mb-12">
+            <!-- این IDها خیلی مهم هستند -->
+            <h2 id="grade-title" class="text-4xl font-extrabold text-slate-800">خوش آمدی قهرمان!</h2>
+            <p id="grade-desc" class="text-slate-500 mt-2">یکی از پایه‌ها را انتخاب کن تا شروع کنیم.</p>
         </header>
 
-        <!-- کارت‌های محتوا با استایلِ کارتونی/مدرن -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- کارت اول -->
-            <div class="group bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 border-b-4 border-indigo-500">
-                <div class="text-4xl mb-4">📄</div>
-                <h3 class="font-bold text-xl text-slate-800 mb-2">جزوات PDF</h3>
-                <p class="text-slate-500 text-sm">جزواتِ کاملاً رنگی و دست‌نویس</p>
-            </div>
-            
-            <!-- کارت دوم -->
-            <div class="group bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 border-b-4 border-purple-500">
-                <div class="text-4xl mb-4">🎥</div>
-                <h3 class="font-bold text-xl text-slate-800 mb-2">فیلم آموزشی</h3>
-                <p class="text-slate-500 text-sm">ویدیوهایِ تعاملی و جذاب</p>
-            </div>
-
-            <!-- کارت سوم -->
-            <div class="group bg-white p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-3 border-b-4 border-yellow-500">
-                <div class="text-4xl mb-4">🎮</div>
-                <h3 class="font-bold text-xl text-slate-800 mb-2">بازی و تمرین</h3>
-                <p class="text-slate-500 text-sm">محیطی برای چالش‌های ریاضی</p>
-            </div>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border-b-4 border-indigo-500">📄 جزوات</div>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border-b-4 border-purple-500">🎥 فیلم‌ها</div>
+            <div class="bg-white p-8 rounded-3xl shadow-xl border-b-4 border-yellow-500">🎮 تمرین</div>
         </div>
     </main>
-<script>
-    // ۱. این «مغز» داده‌های سایت ماست
-    const appData = {
-        seventh: { title: "هفتم", color: "indigo", desc: "شروع ماجراجویی ریاضی!" },
-        eighth: { title: "هشتم", color: "purple", desc: "قدم‌های محکم‌تر در ریاضی!" },
-        ninth: { title: "نهم", color: "yellow", desc: "فتح قله‌های هندسه!" }
-    };
 
-    // ۲. تابع اصلی برای آپدیت کردن صفحه
-    function loadGrade(gradeKey) {
-        const grade = appData[gradeKey];
-        
-        // تغییر عنوان اصلی
-        document.querySelector('h2').بسیار عالی! ما تا الان «پوسته‌ی» سایت (Layout) را ساختیم. حالا باید به این پوسته «مغز» (Logic) اضافه کنیم تا سایت بفهمد که وقتی دانش‌آموز روی «پایه هفتم» کلیک می‌کند، باید محتوای هفتم را نشان دهد و وقتی روی «نهم» کلیک کرد، رنگ‌ها و محتوا تغییر کنند.
+    <script>
+        // دیتای ما
+        const appData = {
+            seventh: { title: "ریاضیات پایه هفتم", desc: "ماجراجویی در دنیای اعداد!" },
+            eighth: { title: "ریاضیات پایه هشتم", desc: "قدم‌های محکم‌تر در جبر و هندسه!" },
+            ninth: { title: "ریاضیات پایه نهم", desc: "فتح قله‌های ریاضیات متوسطه!" }
+        };
 
-قدم بعدی ما: **پیاده‌سازیِ سیستمِ مدیریت وضعیت (State Management)** است.
-
-### مرحله ۲: پیاده‌سازیِ «موتور تغییر محتوا»
-
-در این مرحله، ما کدی می‌نویسیم که با کلیک روی هر دکمه، کلِ چیدمانِ کارت‌ها را در لحظه تغییر می‌دهد. این کار باعث می‌شود سایتِ تو مثل یک «اپلیکیشن واقعی» سریع و روان باشد.
-
-کدِ زیر را به انتهایِ فایلِ `index.html` خودت اضافه کن (قبل از تگِ `</body>`).
-```javascript
-<script>
-// ۱. این «مغز» داده‌های سایت ماست
-const appData = {
-seventh: { title: "هفتم", color: "indigo", desc: "شروع ماجراجویی ریاضی!" },
-eighth: { title: "هشتم", color: "purple", desc: "قدم‌های محکم‌تر در ریاضی!" },
-ninth: { title: "نهم", color: "yellow", desc: "فتح قله‌های هندسه!" }
-};
-
-// ۲. تابع اصلی برای آپدیت کردن صفحه
-function loadGrade(gradeKey) {
-const grade = appData[gradeKey];
-
-// تغییر عنوان اصلی
-document.querySelector('h2').
-
+        // تابعِ تغییر محتوا
+        function loadGrade(gradeKey) {
+            const data = appData[gradeKey];
+            document.getElementById('grade-title').innerText = data.title;
+            document.getElementById('grade-desc').innerText = data.desc;
+            
+            // یک افکتِ ساده برای اینکه بفهمی کار کرد
+            console.log("تغییر انجام شد به:", gradeKey);
+        }
+    </script>
 </body>
 </html>
