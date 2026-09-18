@@ -10,7 +10,7 @@
         body { font-family: 'Vazirmatn', sans-serif; background-color: #f1f5f9; }
         .gradient-bg { background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); }
         
-        /* افکت ظهور نرم */
+        /* افکت نرم Fade-in */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
@@ -105,12 +105,12 @@
             document.getElementById('content-container').innerHTML = `
                 <div class="w-full h-full space-y-6">
                     <div class="flex gap-4 flex-wrap">
-                        <button onclick="loadContent('pdf', 'path/to/your/pdf.pdf')" class="bg-indigo-500 text-white px-6 py-3 rounded-xl hover:bg-indigo-600 transition shadow-lg">📄 جزوه PDF</button>
-                        <button onclick="loadContent('video', 'https://www.youtube.com/embed/dQw4w9WgXcQ')" class="bg-purple-500 text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition shadow-lg">🎥 فیلم آموزشی</button>
-                        <button onclick="loadContent('app', 'apps/interactive.html')" class="bg-emerald-500 text-white px-6 py-3 rounded-xl hover:bg-emerald-600 transition shadow-lg">🎮 بازی آموزشی</button>
+                        <button onclick="loadContent('pdf', 'path/to/your/pdf.pdf')" class="bg-indigo-500 text-white px-6 py-3 rounded-xl hover:bg-indigo-600 transition shadow-lg font-bold">📄 جزوه PDF</button>
+                        <button onclick="loadContent('video', 'https://www.aparat.com/video/video/embed/videohash/YOUR_VIDEO_HASH/vt/frame')" class="bg-purple-500 text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition shadow-lg font-bold">🎥 فیلم آموزشی</button>
+                        <button onclick="loadContent('app', 'apps/interactive.html')" class="bg-emerald-500 text-white px-6 py-3 rounded-xl hover:bg-emerald-600 transition shadow-lg font-bold">🎮 بازی و اپلیکیشن</button>
                     </div>
-                    <div id="viewer-area" class="h-[450px] w-full bg-slate-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-slate-300 overflow-hidden">
-                        <p class="text-slate-400 font-bold">یکی از دکمه‌های بالا را انتخاب کنید.</p>
+                    <div id="viewer-area" class="h-[480px] w-full bg-slate-100 rounded-2xl flex items-center justify-center border-2 border-dashed border-slate-300 overflow-hidden">
+                        <p class="text-slate-400 font-bold">یکی از دکمه‌های بالا را برای مشاهده محتوا انتخاب کنید.</p>
                     </div>
                 </div>
             `;
@@ -118,10 +118,10 @@
 
         function loadContent(type, source) {
             const area = document.getElementById('viewer-area');
-            if (source.includes('path/to/your')) {
-                area.innerHTML = `<div class="text-center p-10"><p class="text-red-500 font-bold mb-2">هنوز فایل PDF متصل نشده!</p><p class="text-slate-500">لطفاً مسیر واقعی فایل را در تابع loadContent جایگزین کن.</p></div>`;
+            if (source.includes('path/to/your') || source.includes('YOUR_VIDEO_HASH')) {
+                area.innerHTML = `<div class="text-center p-10"><p class="text-amber-600 font-bold mb-2">محتوا هنوز متصل نشده است</p><p class="text-slate-500 text-sm">مسیر فایل یا لینک مربوطه را در کد قرار دهید.</p></div>`;
             } else {
-                area.innerHTML = `<iframe src="${source}" class="w-full h-full border-0"></iframe>`;
+                area.innerHTML = `<iframe src="${source}" class="w-full h-full border-0 rounded-2xl"></iframe>`;
             }
         }
     </script>
