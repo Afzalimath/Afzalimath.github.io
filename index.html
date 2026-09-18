@@ -38,23 +38,41 @@
         </div>
     </main>
 
-    <script>
-        // دیتای ما
-        const appData = {
-            seventh: { title: "ریاضیات پایه هفتم", desc: "ماجراجویی در دنیای اعداد!" },
-            eighth: { title: "ریاضیات پایه هشتم", desc: "قدم‌های محکم‌تر در جبر و هندسه!" },
-            ninth: { title: "ریاضیات پایه نهم", desc: "فتح قله‌های ریاضیات متوسطه!" }
-        };
+   <!-- محتوای اصلی (تغییر یافته) -->
+<main class="flex-1 p-10">
+    <header class="mb-8">
+        <h2 id="grade-title" class="text-4xl font-extrabold text-slate-800">خوش آمدی قهرمان!</h2>
+    </header>
 
-        // تابعِ تغییر محتوا
-        function loadGrade(gradeKey) {
-            const data = appData[gradeKey];
-            document.getElementById('grade-title').innerText = data.title;
-            document.getElementById('grade-desc').innerText = data.desc;
-            
-            // یک افکتِ ساده برای اینکه بفهمی کار کرد
-            console.log("تغییر انجام شد به:", gradeKey);
-        }
-    </script>
+    <!-- این همان «گاوصندوق» است که محتوا داخلش لود می‌شود -->
+    <div id="content-vault" class="bg-white p-8 rounded-3xl shadow-2xl min-h-[400px] border-t-8 border-indigo-500">
+        <p class="text-slate-400 text-center mt-20">لطفاً یک پایه و سپس یک نوع محتوا را انتخاب کن...</p>
+    </div>
+</main>
+
+<script>
+    // تنظیمات محتوا
+    const viewers = {
+        pdf: `<div class="text-center"><h3 class="text-2xl mb-4">📖 نمایشگرِ جزوه</h3><div class="h-64 bg-slate-100 flex items-center justify-center rounded-2xl border-2 border-dashed border-slate-300">در حال بارگذاری PDF.js...</div></div>`,
+        video: `<div class="text-center"><h3 class="text-2xl mb-4">🎥 پلیرِ درس</h3><div class="h-64 bg-black rounded-2xl flex items-center justify-center text-white">پخش‌کننده HLS (محافظت شده)</div></div>`,
+        game: `<div class="text-center"><h3 class="text-2xl mb-4">🎮 محیطِ بازی</h3><iframe sandbox="allow-scripts" class="w-full h-64 rounded-2xl" src="about:blank"></iframe></div>`
+    };
+
+    // تابعِ تزریقِ محتوا به گاوصندوق
+    function openVault(type) {
+        const vault = document.getElementById('content-vault');
+        vault.innerHTML = viewers[type]; // تزریقِ ویوِرهای امن
+    }
+
+    // آپدیت کردنِ تیتر و ریست کردنِ گاوصندوق
+    function loadGrade(gradeKey) {
+        const titles = { seventh: "ریاضیات هفتم", eighth: "ریاضیات هشتم", ninth: "ریاضیات نهم" };
+        document.getElementById('grade-title').innerText = titles[gradeKey];
+        
+        // وقتی پایه عوض شد، گاوصندوق را پاک کن تا کاربر دوباره انتخاب کند
+        document.getElementById('content-vault').innerHTML = '<p class="text-center mt-20">حالا نوع محتوا را انتخاب کن...</p>';
+    }
+</script>
+
 </body>
 </html>
