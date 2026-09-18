@@ -1,1 +1,19 @@
+backend:
+  name: github
+  repo: username/repository-name  # این را با نام کاربری و نام مخزن گیت‌هاب خودت عوض کن
+  branch: main
+
+media_folder: "pdf"  # پوشه‌ای که فایل‌های آپلود شده در آن ذخیره می‌شوند
+public_folder: "/pdf"
+
+collections:
+  - name: "lessons"
+    label: "مدیریت درس‌ها"
+    folder: "content/lessons"
+    create: true
+    fields:
+      - {label: "عنوان درس", name: "title", widget: "string"}
+      - {label: "پایه تحصیلی", name: "grade", widget: "select", options: ["هفتم", "هشتم", "نهم"]}
+      - {label: "فصل", name: "chapter", widget: "number"}
+      - {label: "فایل جزوه PDF", name: "pdf_file", widget: "file"}
 
