@@ -98,7 +98,6 @@
         }
 
         function showViewer(grade, chapter, lesson) {
-            // تبدیل کلمات به اعداد برای مسیردهی
             const gradeMap = { seventh: 7, eighth: 8, ninth: 9 };
             const g = gradeMap[grade];
             
@@ -109,7 +108,7 @@
             document.getElementById('content-container').innerHTML = `
                 <div class="w-full h-full space-y-6">
                     <div class="flex gap-4 flex-wrap">
-                        <button onclick="loadContent('pdf', 'pdf/${g}/f${chapter}/d${lesson}')" class="bg-indigo-500 text-white px-6 py-3 rounded-xl hover:bg-indigo-600 transition shadow-lg font-bold">📄 جزوه PDF</button>
+                        <button onclick="loadContent('pdf', 'pdf/${g}/f${chapter}/d${lesson}/lesson.pdf')" class="bg-indigo-500 text-white px-6 py-3 rounded-xl hover:bg-indigo-600 transition shadow-lg font-bold">📄 جزوه PDF</button>
                         <button onclick="loadContent('video', 'video/${g}/f${chapter}/d${lesson}')" class="bg-purple-500 text-white px-6 py-3 rounded-xl hover:bg-purple-600 transition shadow-lg font-bold">🎥 فیلم آموزشی</button>
                         <button onclick="loadContent('app', 'app/${g}/f${chapter}/d${lesson}')" class="bg-emerald-500 text-white px-6 py-3 rounded-xl hover:bg-emerald-600 transition shadow-lg font-bold">🎮 بازی و اپلیکیشن</button>
                     </div>
@@ -122,8 +121,14 @@
 
         function loadContent(type, source) {
             const area = document.getElementById('viewer-area');
-            // در اینجا می‌توانیم منطقِ بارگذاریِ فایل بر اساسِ source را گسترش دهیم
-            area.innerHTML = `<div class="text-center p-10"><p class="text-indigo-600 font-bold mb-2">در حال بارگذاری مسیر:</p><code class="bg-slate-200 p-2 rounded">${source}</code></div>`;
+            
+            if (type === 'pdf') {
+                // اگر نوع محتوا PDF است، یک iframe بساز
+                area.innerHTML = `<iframe src="${source}" class="w-full h-full border-0"></iframe>`;
+            } else {
+                // برای بقیه موارد فعلاً همان متن قبلی را نمایش بده
+                area.innerHTML = `<div class="text-center p-10"><p class="text-indigo-600 font-bold mb-2">در حال بارگذاری مسیر:</p><code class="bg-slate-200 p-2 rounded">${source}</code></div>`;
+            }
         }
     </script>
 </body>
